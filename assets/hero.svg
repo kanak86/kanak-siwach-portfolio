@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300" role="img" aria-label="Kanak Siwach, Mobile Engineering and Architecture Leader">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0e1116"/><stop offset="1" stop-color="#16233a"/></linearGradient>
+    <linearGradient id="t" x1="0" x2="1"><stop offset="0" stop-color="#3987e5"/><stop offset="1" stop-color="#9085e9"/></linearGradient>
+  </defs>
+  <style>
+    .n{font:700 58px system-ui,Segoe UI,Arial,sans-serif;fill:#eef1f5}
+    .s{font:600 22px system-ui,Segoe UI,Arial,sans-serif;fill:url(#t)}
+    .d{font:16px system-ui,Segoe UI,Arial,sans-serif;fill:#a9b3c1}
+    .c{font:600 15px ui-monospace,Menlo,Consolas,monospace;fill:#eef1f5}
+    .node{fill:#3987e5;opacity:.8;animation:p 3s ease-in-out infinite}
+    .l{stroke:#3987e5;stroke-opacity:.3;stroke-width:1.2;stroke-dasharray:5 6;animation:dash 1.4s linear infinite}
+    @keyframes dash{to{stroke-dashoffset:-11}}@keyframes p{50%{opacity:.25}}
+    @media(prefers-reduced-motion:reduce){.l,.node{animation:none}}
+  </style>
+  <rect width="1000" height="300" rx="18" fill="url(#g)"/>
+  <g>
+    <line class="l" x1="760" y1="60" x2="860" y2="120"/><line class="l" x1="860" y1="120" x2="940" y2="70"/>
+    <line class="l" x1="860" y1="120" x2="800" y2="210"/><line class="l" x1="800" y1="210" x2="920" y2="235"/><line class="l" x1="760" y1="60" x2="800" y2="210"/>
+    <circle class="node" cx="760" cy="60" r="7"/><circle class="node" style="animation-delay:.5s" cx="860" cy="120" r="9"/>
+    <circle class="node" style="animation-delay:1s" cx="940" cy="70" r="6"/><circle class="node" style="animation-delay:1.5s" cx="800" cy="210" r="8"/>
+    <circle class="node" style="animation-delay:2s" cx="920" cy="235" r="6"/>
+  </g>
+  <text class="n" x="50" y="120">Kanak Siwach</text>
+  <text class="s" x="52" y="160">Mobile Engineering &amp; Architecture Leader</text>
+  <text class="d" x="52" y="196">18+ years · Android · Kotlin · Jetpack Compose · MVI · Payments</text>
+  <text class="d" x="52" y="220">React Native · Kotlin Multiplatform · BFF · AI-driven engineering</text>
+  <text class="c" x="52" y="262">99.2% crash-free   ·   50%+ faster delivery   ·   4,000+ tests</text>
+</svg>

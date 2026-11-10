@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kanak Siwach · Mobile Engineering & Architecture Leader</title>
+<meta name="description" content="Interactive career portfolio: 18+ years of Android, Jetpack Compose, MVI, payments, React Native, Kotlin Multiplatform and AI-driven engineering.">
+<meta property="og:title" content="Kanak Siwach · Mobile Engineering & Architecture Leader">
+<meta property="og:description" content="Interactive career portfolio with live architecture demos.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><div class="wrap">
+  <b>Kanak Siwach</b>
+  <a href="#impact">Impact</a><a href="#timeline">Career</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  <button class="icon-btn" id="theme" aria-label="Toggle theme">◐</button>
+</div></nav>
+
+<header class="hero">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Mobile engineering · Architecture · AI-driven delivery</div>
+    <h1>Kanak Siwach</h1>
+    <p class="lead" id="tagline"></p>
+    <div class="cta">
+      <a class="btn primary" href="#demos">Try the live demos</a>
+      <a class="btn" href="#timeline">Explore my career</a>
+      <a class="btn" id="li" href="#">LinkedIn</a>
+      <a class="btn" id="gh" href="#">Source on GitHub</a>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<section id="impact"><div class="wrap">
+  <h2>Measured impact</h2>
+  <p class="sub">Numbers from my résumé, shown plainly. Hover any bar for the exact value.</p>
+  <h3 style="margin:0 0 4px">Before → after</h3>
+  <p class="note" style="margin:0 0 12px">Each bar starts at zero. Figures are as reported on my résumés and by me; scope is stated on each chart.</p>
+  <div id="ba" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px"></div>
+  <div class="card" style="margin-top:16px"><h3>Reported lift in commerce flows</h3><p class="note">Floors as reported ("20%+"), different products, not directly comparable.</p><div id="chart-lift" style="max-width:520px"></div></div>
+</div></section>
+
+<section id="timeline"><div class="wrap">
+  <h2>Career timeline</h2>
+  <p class="sub">Ten roles, 2008 to 2026. Click a role to expand what I built.</p>
+  <div class="chips" id="role-filter" style="margin-bottom:18px"></div>
+  <div class="tl" id="tl"></div>
+</div></section>
+
+<section id="architecture"><div class="wrap">
+  <h2>Architecture explorer</h2>
+  <p class="sub">The systems I designed, drawn as flows. Each links to an original, runnable sample (no employer code).</p>
+  <div class="tabs" role="tablist" id="arch-tabs"></div>
+  <div class="arch">
+    <div class="card"><svg id="arch-svg" viewBox="0 0 760 250" width="100%" role="img" aria-label="Architecture diagram"></svg></div>
+    <div class="card" id="arch-info"></div>
+  </div>
+</div></section>
+
+<section id="demos"><div class="wrap">
+  <h2>Live demos</h2>
+  <p class="sub">Interactive JavaScript ports of the logic in the Kotlin samples. Same rules, so you can poke at the behavior without installing anything.</p>
+
+  <h3 style="margin:18px 0 8px">1 · MVI: intents → results → state</h3>
+  <div class="demo">
+    <div class="card">
+      <div style="display:flex;gap:8px"><button class="btn" id="mvi-load">Load</button><button class="btn" id="mvi-fail">Load (offline)</button></div>
+      <label for="mvi-q">Search (an intent)</label><input id="mvi-q" type="text" placeholder="try: court">
+      <div id="mvi-list" style="margin-top:10px"></div>
+    </div>
+    <div class="card"><b>State (single source of truth)</b><pre id="mvi-state"></pre><b style="display:block;margin-top:10px">Event log</b><pre id="mvi-log" style="max-height:140px"></pre></div>
+  </div>
+
+  <h3 style="margin:28px 0 8px">2 · Checkout: provider eligibility + state machine</h3>
+  <div class="demo">
+    <div class="card">
+      <label for="co-total">Order total: <b id="co-total-v"></b></label><input id="co-total" type="range" min="1000" max="150000" step="500" value="20000">
+      <label for="co-country">Country / currency</label>
+      <select id="co-country"><option value="US|USD">US · USD</option><option value="DE|EUR">DE · EUR</option></select>
+      <label>Available methods (rendered from the registry)</label><div class="chips" id="co-methods"></div>
+      <label>Pay-in-4 split (sums exactly to total)</label><div id="co-split" class="mono-tab"></div>
+    </div>
+    <div class="card"><b>State machine</b><div id="co-state" style="margin:8px 0;font-weight:700"></div>
+      <div class="chips" id="co-actions"></div><pre id="co-log" style="margin-top:10px;max-height:150px"></pre></div>
+  </div>
+
+  <h3 style="margin:28px 0 8px">3 · BFF: parallel fan-out with graceful degradation</h3>
+  <div class="demo">
+    <div class="card">
+      <label for="b-u">User service (critical): <b id="b-u-v"></b></label><input id="b-u" type="range" min="50" max="2000" step="50" value="300">
+      <label for="b-o">Orders service (optional, 400 ms timeout): <b id="b-o-v"></b></label><input id="b-o" type="range" min="50" max="2000" step="50" value="300">
+      <label for="b-r">Recommendations (optional, 400 ms timeout): <b id="b-r-v"></b></label><input id="b-r" type="range" min="50" max="2000" step="50" value="700">
+      <p class="note">Critical timeout 1500 ms. Slow optional services return a degraded section instead of failing the screen.</p>
+    </div>
+    <div class="card"><div id="bff-chart"></div><pre id="bff-out" style="margin-top:10px;max-height:150px"></pre></div>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Skills map</h2>
+  <p class="sub">Filter by area; each skill shows where I used it.</p>
+  <div class="chips" id="skill-filter" style="margin-bottom:16px"></div>
+  <div class="grid2" id="skills-grid"></div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2>Let's talk</h2>
+  <p class="sub">Open to senior and staff mobile engineering roles, based in Sacramento, CA.</p>
+  <div class="cta"><a class="btn primary" id="mail" href="#">Email me</a><a class="btn" id="li2" href="#">LinkedIn</a></div>
+</div></section>
+
+<footer><div class="wrap">© <span id="yr"></span> Kanak Siwach. Samples are original and contain no employer code.</div></footer>
+<dialog id="proj" aria-labelledby="proj-title"><div class="proj-head"><div><h3 id="proj-title"></h3><div class="o" id="proj-sub"></div></div><button class="icon-btn" id="proj-close" aria-label="Close project details">✕</button></div><div id="proj-body"></div></dialog>
+<div class="toast" id="toast"></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body></html>
