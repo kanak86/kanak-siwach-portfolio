@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
 class ProductViewModelTest {
     private val sneakers = listOf(Product("1", "Air Runner", 12000), Product("2", "Court Classic", 9000))
 
-    @Test fun `load success moves loading -> loaded`() = runTest(StandardTestDispatcher()) {
+    @Test fun `load success goes through loading then loaded`() = runTest(StandardTestDispatcher()) {
         val vm = ProductViewModel({ sneakers }, this)
         val seen = mutableListOf<ProductState>()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { vm.state.toList(seen) }
