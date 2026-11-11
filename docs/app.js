@@ -13,7 +13,31 @@ $("#about-text").textContent = P.about;
 P.glance.forEach(([k, v]) => $("#glance").append(el("dt", {}, k), el("dd", {}, v)));
 $("#li").href = $("#li2").href = P.linkedin; $("#gh").href = P.repo; $("#mail").href = "mailto:" + P.email;
 $("#yr").textContent = new Date().getFullYear();
-$("#theme").onclick = () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; drawAll(); };
+$("#gh2").href = P.repo; $("#mail-text").textContent = P.email;
+$("#copy-mail").onclick = () => { (navigator.clipboard ? navigator.clipboard.writeText(P.email) : Promise.reject()).then(() => toast("Email address copied"), () => toast(P.email)); };
+const syncThemeBtn = () => { const dark = document.documentElement.dataset.theme === "dark"; $("#theme").setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme"); $("#theme span").textContent = dark ? "☀" : "☾"; };
+$("#theme").onclick = () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("theme", r.dataset.theme); } catch (e) {} syncThemeBtn(); drawAll(); };
+syncThemeBtn();
+try { matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => { let saved; try { saved = localStorage.getItem("theme"); } catch (x) {} if (!saved) { document.documentElement.dataset.theme = e.matches ? "light" : "dark"; syncThemeBtn(); drawAll(); } }); } catch (e) {}
+
+// ---- nav: hamburger + scroll-spy
+const menu = $("#menu"), links = $("#nav-links");
+const setMenu = open => { links.classList.toggle("open", open); menu.setAttribute("aria-expanded", open); menu.setAttribute("aria-label", open ? "Close menu" : "Open menu"); };
+menu.onclick = () => setMenu(!links.classList.contains("open"));
+links.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && links.classList.contains("open")) { setMenu(false); menu.focus(); } });
+document.addEventListener("click", e => { if (links.classList.contains("open") && !e.target.closest("#nav")) setMenu(false); });
+const SPY = { about: "about", ai: "ai", skills: "skills", timeline: "timeline", architecture: "architecture", demos: "architecture", contact: "contact" };
+const spyObs = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const id = SPY[e.target.id];
+  $$("#nav-links a").forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("active", on); on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"); }); }), { rootMargin: "-45% 0px -50% 0px" });
+Object.keys(SPY).forEach(id => { const n = document.getElementById(id); if (n) spyObs.observe(n); });
+addEventListener("scroll", () => $("#nav").classList.toggle("scrolled", scrollY > 8), { passive: true });
+
+// ---- scroll reveal
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+  const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  requestAnimationFrame(() => $$("section h2, section .sub, .story, .ai-block, #skills-grid > .card, .xp-role, .arch, .demo, .contact-card").forEach((n, i) => { n.classList.add("reveal"); rv.observe(n); }));
+}
 
 // ---- stats count-up
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

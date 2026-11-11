@@ -9,6 +9,21 @@
 > **18+ years** building consumer mobile apps at scale. Most recently **Senior Staff Engineer at GOAT** (platform serving ~120K daily active users), where I led the Fawkes Android architecture rewrite, owned checkout payments, and rolled out AI agents that cut UI development time by 50%+.
 > This repository is a guided tour of *how* I build: architecture diagrams, live demos, and small original code samples. It contains **no employer code**.
 
+## AI-driven engineering
+
+At GOAT I wrote **20 of the 40** Claude Code agents and skills in our Android team's AI toolkit, covering planning, code migration, PR workflow, crash triage and docs.
+
+| | |
+|---|---|
+| **72 presenters** migrated to MVI with two migration skills I wrote | **50%+** less UI development time with Claude Code agents, including Figma-to-Compose |
+| **1 ticket per crash**: `crash-correlator` merges Play Console and Embrace crashes and has `jira-ticketer` create or update a single ticket | **Ticket to PR**: `jira-ticketer`, `pr-orchestrator` and `pr-validator` |
+
+| crash-correlator (simulated data) | migrate-presenter |
+|---|---|
+| <img src="assets/crash-correlator-demo.gif" width="400"> | <img src="assets/presenter-migration-demo.gif" width="400"> |
+
+→ Original examples: [`crash-correlator` agent](samples/claude-agents/.claude/agents/crash-correlator.md) · [`migrate-presenter` skill](samples/claude-agents/.claude/skills/migrate-presenter/SKILL.md) · [before/after presenter with tests](samples/mvi-core/src/main/kotlin/dev/kanak/mvi/migration)
+
 ## Impact at a glance
 
 | | |
@@ -55,7 +70,7 @@ Built a custom backend service at Ticketmaster and worked with Java / Spring Boo
 → Code: [`samples/bff-core`](samples/bff-core)
 
 ### 5 · AI-driven engineering
-Built and deployed custom Claude Code agents, skills and design-to-code pipelines across the engineering organization.
+Wrote 20 of the 40 agents and skills in the team's Claude Code toolkit (see [AI-driven engineering](#ai-driven-engineering) above), including a Figma-to-Compose agent.
 <img src="assets/arch-ai-agents.svg" alt="Figma to Compose agent" width="100%">
 
 → Examples: [`samples/claude-agents`](samples/claude-agents)
@@ -64,9 +79,7 @@ Built and deployed custom Claude Code agents, skills and design-to-code pipeline
 
 | Role | Company | Period |
 |---|---|---|
-| Senior Staff Engineer | GOAT Group | Mar 2026 – Aug 2026 |
-| Staff Engineer | GOAT Group | Feb 2022 – Mar 2026 |
-| Sr. Engineer II / Sr. Android Engineer | GOAT Group | Jun 2018 – Feb 2022 |
+| Sr. Engineer II → Staff → Senior Staff Engineer | GOAT Group | Jun 2018 – Aug 2026 |
 | Lead Android Developer | UpKeep Maintenance Management | Mar 2018 – Jun 2018 |
 | Lead Android Developer | Grindr | Apr 2017 – Feb 2018 |
 | Senior Android Developer | Ticketmaster | Jul 2015 – Apr 2017 |
@@ -89,7 +102,7 @@ Built and deployed custom Claude Code agents, skills and design-to-code pipeline
 ## Repository map
 
 ```
-docs/       interactive site (GitHub Pages): timeline, charts, architecture explorer, live demos
+docs/       interactive site (GitHub Pages): AI work, skills, experience timeline, architecture explorer, live demos
 assets/     animated SVG diagrams and demo GIFs
 samples/    original Kotlin / TypeScript examples (CI runs the JVM tests)
 ```

@@ -7,16 +7,20 @@
 <meta name="description" content="AI-driven Android engineering. Interactive career portfolio: 18+ years of Android, Jetpack Compose, MVI, payments, React Native, Kotlin Multiplatform and AI-driven engineering.">
 <meta property="og:title" content="Kanak Siwach · Mobile Engineering & Architecture Leader">
 <meta property="og:description" content="Interactive career portfolio with live architecture demos.">
+<script>(function(){var t;try{t=localStorage.getItem("theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;document.documentElement.classList.add("js")})()</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav><div class="wrap">
-  <b>Kanak Siwach</b>
-  <a href="#about">About</a><a href="#ai">AI</a><a href="#skills">Skills</a><a href="#timeline">Experience</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#contact">Contact</a>
-  <button class="icon-btn" id="theme" aria-label="Toggle theme">◐</button>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="#top">Kanak Siwach</a>
+  <div class="links" id="nav-links">
+    <a href="#about">About</a><a href="#ai">AI</a><a href="#skills">Skills</a><a href="#timeline">Experience</a><a href="#architecture">Projects</a><a href="#contact">Contact</a>
+  </div>
+  <button class="icon-btn" id="theme" type="button" aria-label="Switch to light theme"><span aria-hidden="true">☀</span></button>
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
 </div></nav>
 
-<header class="hero">
+<header class="hero" id="top">
   <canvas id="bg" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="eyebrow">AI-driven engineering · Mobile · Architecture</div>
@@ -89,8 +93,9 @@
 </div></section>
 
 <section id="architecture"><div class="wrap">
-  <h2>Architecture explorer</h2>
-  <p class="sub">The systems I designed, drawn as flows. Each links to an original, runnable sample (no employer code).</p>
+  <h2>Projects</h2>
+  <p class="sub">The systems I designed, drawn as flows, then live demos you can run. Each links to an original, runnable sample (no employer code).</p>
+  <h3 class="sub-h">Architecture explorer</h3>
   <div class="tabs" role="tablist" id="arch-tabs"></div>
   <div class="arch">
     <div class="card"><svg id="arch-svg" viewBox="0 0 760 250" width="100%" role="img" aria-label="Architecture diagram"></svg></div>
@@ -139,8 +144,12 @@
 
 <section id="contact"><div class="wrap">
   <h2>Let's talk</h2>
-  <p class="sub">Open to senior and staff mobile engineering roles, based in Sacramento, CA.</p>
-  <div class="cta"><a class="btn primary" id="mail" href="#">Email me</a><a class="btn" id="li2" href="#">LinkedIn</a></div>
+  <p class="sub">Open to senior and staff mobile engineering roles. Based in Sacramento, CA.</p>
+  <div class="contact-grid">
+    <div class="card contact-card"><h3>Email</h3><p class="note" id="mail-text"></p><div class="cta"><a class="btn primary" id="mail" href="#">Email me</a><button class="btn" id="copy-mail" type="button">Copy address</button></div></div>
+    <div class="card contact-card"><h3>LinkedIn</h3><p class="note">Full work history.</p><div class="cta"><a class="btn" id="li2" href="#" target="_blank" rel="noopener">View profile</a></div></div>
+    <div class="card contact-card"><h3>Source</h3><p class="note">This site and every sample, with tests running on GitHub Actions.</p><div class="cta"><a class="btn" id="gh2" href="#" target="_blank" rel="noopener">Open on GitHub</a></div></div>
+  </div>
 </div></section>
 
 <footer><div class="wrap">© <span id="yr"></span> Kanak Siwach. Samples are original and contain no employer code.</div></footer>
