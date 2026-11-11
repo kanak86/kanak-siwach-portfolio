@@ -9,10 +9,10 @@ window.PORTFOLIO = {
   repo: "https://github.com/kanak86/kanak-siwach-portfolio",
 
   stats: [
-    { value: 20, suffix: "", label: "agents and skills I wrote", sub: "out of a 40-piece team AI toolkit" },
-    { value: 72, suffix: "", label: "presenters migrated to MVI", sub: "with migration skills I wrote" },
-    { value: 50, suffix: "%+", label: "less UI development time", sub: "Claude Code agents, incl. Figma-to-Compose" },
     { value: 18, suffix: "+", label: "years in software", sub: "14+ focused on Android" },
+    { value: 99.2, suffix: "%", decimals: 1, label: "crash-free rate", sub: "up from 91.9% in 2 months" },
+    { value: 72, suffix: "", label: "presenters migrated to MVI", sub: "with migration skills I wrote" },
+    { value: 20, suffix: "", label: "agents and skills I wrote", sub: "out of a 40-piece team AI toolkit" },
   ],
 
   about: "I'm an Android engineer with 14+ years of experience and 18+ in software overall. Most recently I was Senior Staff Engineer at GOAT, the world's largest sneaker and streetwear marketplace, where I drove our MVI/MVVM architecture, prototyped Kotlin Multiplatform for the Sneakers.com vertical, and built custom AI agents and skills on Claude Code, including one that turns Figma designs directly into production Compose UI. Before GOAT, I led Android work at Grindr and Ticketmaster, with a focus on testing rigor, A/B testing and revenue-critical features like in-app billing and interactive seat maps. I'm drawn to high-scale consumer mobile engineering at companies that are leaning into AI in how they build, not just in what they ship. Based in Sacramento, CA, and open to senior and staff mobile roles.",
