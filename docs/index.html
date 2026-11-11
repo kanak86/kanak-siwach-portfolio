@@ -4,26 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kanak Siwach · Mobile Engineering & Architecture Leader</title>
-<meta name="description" content="Interactive career portfolio: 18+ years of Android, Jetpack Compose, MVI, payments, React Native, Kotlin Multiplatform and AI-driven engineering.">
+<meta name="description" content="AI-driven Android engineering. Interactive career portfolio: 18+ years of Android, Jetpack Compose, MVI, payments, React Native, Kotlin Multiplatform and AI-driven engineering.">
 <meta property="og:title" content="Kanak Siwach · Mobile Engineering & Architecture Leader">
 <meta property="og:description" content="Interactive career portfolio with live architecture demos.">
+<script>(function(){var t;try{t=localStorage.getItem("theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;document.documentElement.classList.add("js")})()</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav><div class="wrap">
-  <b>Kanak Siwach</b>
-  <a href="#impact">Impact</a><a href="#timeline">Career</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
-  <button class="icon-btn" id="theme" aria-label="Toggle theme">◐</button>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="#top">Kanak Siwach</a>
+  <div class="links" id="nav-links">
+    <a href="#about">About</a><a href="#ai">AI</a><a href="#skills">Skills</a><a href="#timeline">Experience</a><a href="#architecture">Projects</a><a href="#contact">Contact</a>
+  </div>
+  <button class="icon-btn" id="theme" type="button" aria-label="Switch to light theme"><span aria-hidden="true">☀</span></button>
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
 </div></nav>
 
-<header class="hero">
+<header class="hero" id="top">
   <canvas id="bg" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">Mobile engineering · Architecture · AI-driven delivery</div>
+    <div class="eyebrow">AI-driven engineering · Mobile · Architecture</div>
     <h1>Kanak Siwach</h1>
     <p class="lead" id="tagline"></p>
     <div class="cta">
-      <a class="btn primary" href="#demos">Try the live demos</a>
+      <a class="btn primary" href="#ai">See the AI work</a>
+      <a class="btn" href="#demos">Try the live demos</a>
       <a class="btn" href="#timeline">Explore my career</a>
       <a class="btn" id="li" href="#">LinkedIn</a>
       <a class="btn" id="gh" href="#">Source on GitHub</a>
@@ -32,25 +37,65 @@
   </div>
 </header>
 
-<section id="impact"><div class="wrap">
-  <h2>Measured impact</h2>
-  <p class="sub">Numbers from my résumé, shown plainly. Hover any bar for the exact value.</p>
-  <h3 style="margin:0 0 4px">Before → after</h3>
-  <p class="note" style="margin:0 0 12px">Each bar starts at zero. Figures are as reported on my résumés and by me; scope is stated on each chart.</p>
-  <div id="ba" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px"></div>
-  <div class="card" style="margin-top:16px"><h3>Reported lift in commerce flows</h3><p class="note">Floors as reported ("20%+"), different products, not directly comparable.</p><div id="chart-lift" style="max-width:520px"></div></div>
+<section id="about"><div class="wrap about">
+  <div>
+    <h2>About me</h2>
+    <p class="about-text" id="about-text"></p>
+  </div>
+  <aside class="card glance">
+    <h3>At a glance</h3>
+    <dl id="glance"></dl>
+  </aside>
+</div></section>
+
+<section id="ai"><div class="wrap">
+  <h2>AI engineering</h2>
+  <p class="sub">At GOAT I wrote 20 of the 40 Claude Code agents and skills in our Android team's AI toolkit. These four stories show what they did. Every sample linked here is original code, not employer code.</p>
+  <div class="ai-stories" id="ai-stories"></div>
+
+  <div class="card ai-block" id="crash-demo">
+    <div class="ai-block-head"><div><h3>Try it: crash-correlator</h3><p class="note">Simulated crash reports. The agent groups the same crash across both sources, then files one ticket per crash, updating an existing ticket instead of duplicating it.</p></div>
+      <div class="ai-btns"><button class="btn primary" id="cc-run">Run crash-correlator</button><button class="btn" id="cc-reset">Reset</button></div></div>
+    <div class="cc-cols"><div><h4><span class="src">Play Console</span></h4><div id="cc-play"></div></div><div><h4><span class="src">Embrace</span></h4><div id="cc-emb"></div></div></div>
+    <p class="cc-status" id="cc-status" aria-live="polite"></p>
+    <div id="cc-out"></div>
+    <p class="note"><a href="https://github.com/kanak86/kanak-siwach-portfolio/blob/main/samples/claude-agents/.claude/agents/crash-correlator.md">Read the agent definition →</a></p>
+  </div>
+
+  <div class="card ai-block" id="migration">
+    <div class="ai-block-head"><div><h3>Try it: migrate-presenter</h3><p class="note">The change my migration skills made across 72 presenters, on a small original example. Same states out, coordinator calls become typed effects.</p></div>
+      <div class="ai-btns"><button class="btn primary" id="mg-run">Run migration</button><button class="btn" id="mg-reset">Reset</button></div></div>
+    <div class="mg"><pre class="mg-code" id="mg-code" aria-label="Presenter code"></pre><ol class="mg-steps" id="mg-steps"></ol></div>
+    <p class="note"><a href="https://github.com/kanak86/kanak-siwach-portfolio/tree/main/samples/mvi-core/src/main/kotlin/dev/kanak/mvi/migration">Before/after code with tests →</a> · <a href="https://github.com/kanak86/kanak-siwach-portfolio/blob/main/samples/claude-agents/.claude/skills/migrate-presenter/SKILL.md">The skill →</a></p>
+  </div>
+
+  <div class="card ai-block">
+    <h3>The toolkit</h3>
+    <p class="note">All 40 agents and skills in the team toolkit, by stage. <span class="kit-mine-key">Highlighted</span> ones are mine and featured above; I wrote 20 in total. Every agent loads a shared set of convention files (git, commits, Jira, feature flags, Play Console, UI automation, test management).</p>
+    <div class="kit" id="kit"></div>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Skills map</h2>
+  <button class="area-link" id="area-link" type="button">Filter by Area of Expertise <span aria-hidden="true">↓</span></button>
+  <p class="area-caption">Each skill shows where I used it. Select a company to jump to that role.</p>
+  <div class="chips" id="skill-filter" role="group" aria-label="Areas of expertise"></div>
+  <div class="grid2" id="skills-grid"></div>
 </div></section>
 
 <section id="timeline"><div class="wrap">
-  <h2>Career timeline</h2>
-  <p class="sub">Ten roles, 2008 to 2026. Click a role to expand what I built.</p>
-  <div class="chips" id="role-filter" style="margin-bottom:18px"></div>
-  <div class="tl" id="tl"></div>
+  <h2>Experience</h2>
+  <p class="sub">18 years, from backend billing systems to owning Android architecture. Hover a role for the headline, select it to see the impact, what I did and what it achieved.</p>
+  <div class="growth" id="growth" aria-label="How my scope grew"></div>
+  <div class="tl-axis" aria-hidden="true"><span></span><span class="ax"><span>2008</span><span>2012</span><span>2016</span><span>2020</span><span>2024</span></span></div>
+  <div class="xp" id="tl"></div>
 </div></section>
 
 <section id="architecture"><div class="wrap">
-  <h2>Architecture explorer</h2>
-  <p class="sub">The systems I designed, drawn as flows. Each links to an original, runnable sample (no employer code).</p>
+  <h2>Projects</h2>
+  <p class="sub">The systems I designed, drawn as flows, then live demos you can run. Each links to an original, runnable sample (no employer code).</p>
+  <h3 class="sub-h">Architecture explorer</h3>
   <div class="tabs" role="tablist" id="arch-tabs"></div>
   <div class="arch">
     <div class="card"><svg id="arch-svg" viewBox="0 0 760 250" width="100%" role="img" aria-label="Architecture diagram"></svg></div>
@@ -97,17 +142,14 @@
   </div>
 </div></section>
 
-<section id="skills"><div class="wrap">
-  <h2>Skills map</h2>
-  <p class="sub">Filter by area; each skill shows where I used it.</p>
-  <div class="chips" id="skill-filter" style="margin-bottom:16px"></div>
-  <div class="grid2" id="skills-grid"></div>
-</div></section>
-
 <section id="contact"><div class="wrap">
   <h2>Let's talk</h2>
-  <p class="sub">Open to senior and staff mobile engineering roles, based in Sacramento, CA.</p>
-  <div class="cta"><a class="btn primary" id="mail" href="#">Email me</a><a class="btn" id="li2" href="#">LinkedIn</a></div>
+  <p class="sub">Open to senior and staff mobile engineering roles. Based in Sacramento, CA.</p>
+  <div class="contact-grid">
+    <div class="card contact-card"><h3>Email</h3><p class="note" id="mail-text"></p><div class="cta"><a class="btn primary" id="mail" href="#">Email me</a><button class="btn" id="copy-mail" type="button">Copy address</button></div></div>
+    <div class="card contact-card"><h3>LinkedIn</h3><p class="note">Full work history.</p><div class="cta"><a class="btn" id="li2" href="#" target="_blank" rel="noopener">View profile</a></div></div>
+    <div class="card contact-card"><h3>Source</h3><p class="note">This site and every sample, with tests running on GitHub Actions.</p><div class="cta"><a class="btn" id="gh2" href="#" target="_blank" rel="noopener">Open on GitHub</a></div></div>
+  </div>
 </div></section>
 
 <footer><div class="wrap">© <span id="yr"></span> Kanak Siwach. Samples are original and contain no employer code.</div></footer>
