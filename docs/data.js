@@ -2,7 +2,7 @@
 window.PORTFOLIO = {
   name: "Kanak Siwach",
   title: "Mobile Engineering & Architecture Leader",
-  tagline: "Senior Staff Android engineer with 14+ years in Android. At GOAT I wrote 20 of the 40 Claude Code agents and skills in our Android team's AI toolkit, including the skills that migrated 72 presenters to MVI and a Figma-to-Compose agent.",
+  tagline: "18+ years shipping Android at scale: Kotlin, Jetpack Compose, MVI, payments, and AI-driven engineering.",
   location: "Sacramento, CA",
   email: "kanak86.us@gmail.com",
   linkedin: "https://www.linkedin.com/in/kanaksiwach",
