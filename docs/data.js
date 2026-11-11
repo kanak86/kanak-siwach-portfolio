@@ -2,17 +2,27 @@
 window.PORTFOLIO = {
   name: "Kanak Siwach",
   title: "Mobile Engineering & Architecture Leader",
-  tagline: "18+ years shipping Android at scale: Kotlin, Jetpack Compose, MVI, payments, and AI-driven engineering.",
+  tagline: "Senior Staff Android engineer with 14+ years in Android. At GOAT I wrote 20 of the 40 Claude Code agents and skills in our Android team's AI toolkit, including the skills that migrated 72 presenters to MVI and a Figma-to-Compose agent.",
   location: "Sacramento, CA",
   email: "kanak86.us@gmail.com",
   linkedin: "https://www.linkedin.com/in/kanaksiwach",
   repo: "https://github.com/kanak86/kanak-siwach-portfolio",
 
   stats: [
+    { value: 20, suffix: "", label: "agents and skills I wrote", sub: "out of a 40-piece team AI toolkit" },
+    { value: 72, suffix: "", label: "presenters migrated to MVI", sub: "with migration skills I wrote" },
+    { value: 50, suffix: "%+", label: "less UI development time", sub: "Claude Code agents, incl. Figma-to-Compose" },
     { value: 18, suffix: "+", label: "years in software", sub: "14+ focused on Android" },
-    { value: 99.2, suffix: "%", decimals: 1, label: "crash-free rate", sub: "up from 91.9% in 2 months" },
-    { value: 50, suffix: "%+", label: "faster delivery", sub: "unified MVI/Compose framework" },
-    { value: 4000, suffix: "+", label: "unit tests", sub: "90%+ coverage at Grindr", comma: true },
+  ],
+
+  about: "I'm an Android engineer with 14+ years of experience and 18+ in software overall. Most recently I was Senior Staff Engineer at GOAT, the world's largest sneaker and streetwear marketplace, where I drove our MVI/MVVM architecture, prototyped Kotlin Multiplatform for the Sneakers.com vertical, and built custom AI agents and skills on Claude Code, including one that turns Figma designs directly into production Compose UI. Before GOAT, I led Android work at Grindr and Ticketmaster, with a focus on testing rigor, A/B testing and revenue-critical features like in-app billing and interactive seat maps. I'm drawn to high-scale consumer mobile engineering at companies that are leaning into AI in how they build, not just in what they ship. Based in Sacramento, CA, and open to senior and staff mobile roles.",
+
+  glance: [
+    ["Based in", "Sacramento, CA"],
+    ["Open to", "Senior and staff mobile roles"],
+    ["Focus", "Android architecture, AI-driven engineering"],
+    ["Also", "Kotlin Multiplatform, React Native, BFF services"],
+    ["Most recent", "Senior Staff Engineer, GOAT"],
   ],
 
   roles: [

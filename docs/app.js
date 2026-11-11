@@ -9,6 +9,8 @@ const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("
 
 // ---- header / links / theme
 $("#tagline").textContent = P.tagline;
+$("#about-text").textContent = P.about;
+P.glance.forEach(([k, v]) => $("#glance").append(el("dt", {}, k), el("dd", {}, v)));
 $("#li").href = $("#li2").href = P.linkedin; $("#gh").href = P.repo; $("#mail").href = "mailto:" + P.email;
 $("#yr").textContent = new Date().getFullYear();
 $("#theme").onclick = () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; drawAll(); };
