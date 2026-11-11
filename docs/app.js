@@ -16,9 +16,9 @@ $("#yr").textContent = new Date().getFullYear();
 $("#gh2").href = P.repo; $("#mail-text").textContent = P.email;
 $("#copy-mail").onclick = () => { (navigator.clipboard ? navigator.clipboard.writeText(P.email) : Promise.reject()).then(() => toast("Email address copied"), () => toast(P.email)); };
 const syncThemeBtn = () => { const dark = document.documentElement.dataset.theme === "dark"; $("#theme").setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme"); $("#theme span").textContent = dark ? "☀" : "☾"; };
-$("#theme").onclick = () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("theme", r.dataset.theme); } catch (e) {} syncThemeBtn(); drawAll(); };
+$("#theme").onclick = () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("theme", r.dataset.theme); } catch (e) {} syncThemeBtn(); drawAll(); window.heroRecolor && heroRecolor(); };
 syncThemeBtn();
-try { matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => { let saved; try { saved = localStorage.getItem("theme"); } catch (x) {} if (!saved) { document.documentElement.dataset.theme = e.matches ? "light" : "dark"; syncThemeBtn(); drawAll(); } }); } catch (e) {}
+try { matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => { let saved; try { saved = localStorage.getItem("theme"); } catch (x) {} if (!saved) { document.documentElement.dataset.theme = e.matches ? "light" : "dark"; syncThemeBtn(); drawAll(); window.heroRecolor && heroRecolor(); } }); } catch (e) {}
 
 // ---- nav: hamburger + scroll-spy
 const menu = $("#menu"), links = $("#nav-links");
@@ -37,6 +37,11 @@ addEventListener("scroll", () => $("#nav").classList.toggle("scrolled", scrollY 
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
   requestAnimationFrame(() => $$("section h2, section .sub, .story, .ai-block, #skills-grid > .card, .xp-role, .arch, .demo, .contact-card").forEach((n, i) => { n.classList.add("reveal"); rv.observe(n); }));
+  // Coming back to the tab (or a restored page) shows everything already above the bottom of the screen at once.
+  const revealUpToView = () => $$(".reveal:not(.in)").forEach(n => { if (n.getBoundingClientRect().top < innerHeight) { n.classList.add("in"); rv.unobserve(n); } });
+  addEventListener("pageshow", revealUpToView);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) revealUpToView(); });
+  addEventListener("scroll", () => requestAnimationFrame(revealUpToView), { passive: true });
 }
 
 // ---- stats count-up
@@ -50,14 +55,23 @@ $$(".stat .v").forEach(n => {
     const f = now => { const k = Math.min(1, (now - t0) / 1200), ease = 1 - Math.pow(1 - k, 3); n.textContent = fmt(t * ease, d, c, s); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })).observe(n);
 });
 
-// ---- hero background (light particle network)
-(() => { const c = $("#bg"), x = c.getContext("2d"); let w, h, pts;
-  const init = () => { w = c.width = c.offsetWidth; h = c.height = c.offsetHeight; pts = Array.from({ length: Math.min(60, w / 18) }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3 })); };
-  const draw = () => { x.clearRect(0, 0, w, h); const col = css("--blue");
-    pts.forEach(p => { p.x = (p.x + p.vx + w) % w; p.y = (p.y + p.vy + h) % h; x.fillStyle = col; x.beginPath(); x.arc(p.x, p.y, 2, 0, 7); x.fill(); });
-    pts.forEach((a, i) => pts.slice(i + 1).forEach(b => { const d = Math.hypot(a.x - b.x, a.y - b.y); if (d < 120) { x.strokeStyle = col; x.globalAlpha = (1 - d / 120) * .35; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); x.globalAlpha = 1; } }));
-    if (!reduce) requestAnimationFrame(draw); };
-  init(); draw(); addEventListener("resize", init); })();
+// ---- hero background (light particle network): runs only while the hero is on screen and the tab is visible
+(() => { const c = $("#bg"), x = c.getContext("2d"); let w = 0, h = 0, pts = [], col = css("--blue"), raf = 0, onScreen = true;
+  const init = () => { const nw = c.offsetWidth, nh = c.offsetHeight; if (nw === w && Math.abs(nh - h) < 80) return;
+    w = c.width = nw; h = c.height = nh; pts = Array.from({ length: Math.min(60, w / 18) }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3 })); };
+  const draw = () => { raf = 0; x.clearRect(0, 0, w, h); x.fillStyle = x.strokeStyle = col;
+    for (const p of pts) { p.x = (p.x + p.vx + w) % w; p.y = (p.y + p.vy + h) % h; x.beginPath(); x.arc(p.x, p.y, 2, 0, 7); x.fill(); }
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) { const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d < 120) { x.globalAlpha = (1 - d / 120) * .35; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); } }
+    x.globalAlpha = 1; if (!reduce) loop(); };
+  const loop = () => { if (!raf && onScreen && !document.hidden) raf = requestAnimationFrame(draw); };
+  const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
+  init(); draw();
+  new IntersectionObserver(es => { onScreen = es[0].isIntersecting; onScreen ? loop() : stop(); }).observe(c);
+  document.addEventListener("visibilitychange", () => document.hidden ? stop() : loop());
+  addEventListener("resize", init, { passive: true });
+  window.heroRecolor = () => { col = css("--blue"); if (reduce || !raf) draw(); };
+})();
 
 // ---- bar chart (zero baseline, rounded data ends, hover, table fallback)
 function barChart(host, rows, { max, unit = "%", colors }) {
@@ -102,6 +116,15 @@ function setOpen(d, open) {
   d.classList.toggle("open", open); d.querySelector(".xp-head").setAttribute("aria-expanded", open);
   $$(".fl", d).forEach(f => f.style.width = open ? f.dataset.w + "%" : "0");
 }
+function openOnly(d) {
+  const head = d.querySelector(".xp-head"), before = head.getBoundingClientRect().top;
+  const others = $$("#tl .xp-role.open").filter(o => o !== d);
+  others.forEach(o => { o.classList.add("instant"); setOpen(o, false); });
+  const shift = head.getBoundingClientRect().top - before;
+  if (shift) window.scrollBy({ top: shift, behavior: "instant" });
+  requestAnimationFrame(() => others.forEach(o => o.classList.remove("instant")));
+  setOpen(d, true);
+}
 function drawTL() { const tl = $("#tl"); tl.innerHTML = "";
   P.roles.forEach((r, i) => {
     const [s0, s1] = span(r), key = roleKey(r), id = "xp-" + key;
@@ -120,7 +143,7 @@ function drawTL() { const tl = $("#tl"); tl.innerHTML = "";
         ${hasDetail(r) ? `<p class="s3"><button class="btn detail" data-i="${i}">View project details →</button></p>` : ""}
       </div></div>`;
     const h = d.querySelector(".xp-head");
-    h.onclick = () => setOpen(d, !d.classList.contains("open"));
+    h.onclick = () => d.classList.contains("open") ? setOpen(d, false) : openOnly(d);
     const db = d.querySelector(".detail"); if (db) db.onclick = e => { e.stopPropagation(); openProject(r, db); };
     tl.append(d);
   });
@@ -253,7 +276,7 @@ $("#skills-grid").addEventListener("click", e => { const b = e.target.closest(".
 $("#area-link").onclick = () => { const f = $("#skill-filter"); f.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); f.classList.remove("pulse"); void f.offsetWidth; f.classList.add("pulse"); (f.querySelector(".chip.on") || f.querySelector(".chip")).focus({ preventScroll: true }); };
 function goToRole(key) {
   const r = $(`#tl .xp-role[data-key="${key}"]`); if (!r) return;
-  setOpen(r, true);
+  openOnly(r);
   r.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash"); r.querySelector(".xp-head").focus({ preventScroll: true });
 }

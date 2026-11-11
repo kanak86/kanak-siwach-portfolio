@@ -239,3 +239,4 @@ nav.scrolled{box-shadow:0 4px 16px rgba(0,0,0,.12)}
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .js .reveal.in{opacity:1;transform:none}
 .contact-card{display:flex;flex-direction:column}.contact-card .cta{margin-top:auto;padding-top:14px}
+.xp-role.instant,.xp-role.instant *{transition:none!important}
