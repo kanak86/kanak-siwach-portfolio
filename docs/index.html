@@ -12,7 +12,7 @@
 <body>
 <nav><div class="wrap">
   <b>Kanak Siwach</b>
-  <a href="#about">About</a><a href="#impact">Impact</a><a href="#timeline">Career</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  <a href="#about">About</a><a href="#ai">AI</a><a href="#impact">Impact</a><a href="#timeline">Career</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
   <button class="icon-btn" id="theme" aria-label="Toggle theme">◐</button>
 </div></nav>
 
@@ -42,6 +42,34 @@
     <h3>At a glance</h3>
     <dl id="glance"></dl>
   </aside>
+</div></section>
+
+<section id="ai"><div class="wrap">
+  <h2>AI engineering</h2>
+  <p class="sub">At GOAT I wrote 20 of the 40 Claude Code agents and skills in our Android team's AI toolkit. These four stories show what they did. Every sample linked here is original code, not employer code.</p>
+  <div class="ai-stories" id="ai-stories"></div>
+
+  <div class="card ai-block" id="crash-demo">
+    <div class="ai-block-head"><div><h3>Try it: crash-correlator</h3><p class="note">Simulated crash reports. The agent groups the same crash across both sources, then files one ticket per crash, updating an existing ticket instead of duplicating it.</p></div>
+      <div class="ai-btns"><button class="btn primary" id="cc-run">Run crash-correlator</button><button class="btn" id="cc-reset">Reset</button></div></div>
+    <div class="cc-cols"><div><h4><span class="src">Play Console</span></h4><div id="cc-play"></div></div><div><h4><span class="src">Embrace</span></h4><div id="cc-emb"></div></div></div>
+    <p class="cc-status" id="cc-status" aria-live="polite"></p>
+    <div id="cc-out"></div>
+    <p class="note"><a href="https://github.com/kanak86/kanak-siwach-portfolio/blob/main/samples/claude-agents/.claude/agents/crash-correlator.md">Read the agent definition →</a></p>
+  </div>
+
+  <div class="card ai-block" id="migration">
+    <div class="ai-block-head"><div><h3>Try it: migrate-presenter</h3><p class="note">The change my migration skills made across 72 presenters, on a small original example. Same states out, coordinator calls become typed effects.</p></div>
+      <div class="ai-btns"><button class="btn primary" id="mg-run">Run migration</button><button class="btn" id="mg-reset">Reset</button></div></div>
+    <div class="mg"><pre class="mg-code" id="mg-code" aria-label="Presenter code"></pre><ol class="mg-steps" id="mg-steps"></ol></div>
+    <p class="note"><a href="https://github.com/kanak86/kanak-siwach-portfolio/tree/main/samples/mvi-core/src/main/kotlin/dev/kanak/mvi/migration">Before/after code with tests →</a> · <a href="https://github.com/kanak86/kanak-siwach-portfolio/blob/main/samples/claude-agents/.claude/skills/migrate-presenter/SKILL.md">The skill →</a></p>
+  </div>
+
+  <div class="card ai-block">
+    <h3>The toolkit</h3>
+    <p class="note">All 40 agents and skills in the team toolkit, by stage. <span class="kit-mine-key">Highlighted</span> ones are mine and featured above; I wrote 20 in total. Every agent loads a shared set of convention files (git, commits, Jira, feature flags, Play Console, UI automation, test management).</p>
+    <div class="kit" id="kit"></div>
+  </div>
 </div></section>
 
 <section id="impact"><div class="wrap">

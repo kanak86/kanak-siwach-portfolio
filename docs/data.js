@@ -25,6 +25,25 @@ window.PORTFOLIO = {
     ["Most recent", "Senior Staff Engineer, GOAT"],
   ],
 
+  ai: {
+    stories: [
+      { icon: "crash", title: "Crash intelligence", metric: "1 ticket per crash", body: "Two fetcher agents pull crashes from Play Console and Embrace. crash-correlator matches the same crash across both sources, and jira-ticketer creates or updates exactly one ticket for it.", pieces: ["play-crash-fetcher", "embrace-crash-fetcher", "crash-correlator", "jira-ticketer"], link: "#crash-demo", cta: "Try the demo" },
+      { icon: "pr", title: "Ticket to pull request", metric: "", body: "jira-ticketer turns work into well-formed tickets, pr-orchestrator runs the pull request workflow, and pr-validator checks each PR before it reaches a reviewer.", pieces: ["jira-ticketer", "pr-orchestrator", "pr-validator"] },
+      { icon: "code", title: "Code health at scale", metric: "72 presenters", body: "Two migration skills moved 72 presenters across two generations of legacy patterns to one base presenter with typed effects. dead-code-hunter finds code that can be removed.", pieces: ["migrate-presenter", "migrate-presenter-legacy", "dead-code-hunter"], link: "#migration", cta: "Try the migration" },
+      { icon: "design", title: "Design to code", metric: "50%+ less UI time", body: "The Figma-to-Compose agent turns a Figma frame into production Compose UI built from design-system tokens and existing components.", pieces: ["figma-to-compose"], link: "https://github.com/kanak86/kanak-siwach-portfolio/blob/main/samples/claude-agents/.claude/agents/figma-to-compose.md", cta: "Read the agent" },
+    ],
+    mine: ["pr-orchestrator", "pr-validator", "crash-correlator", "embrace-crash-fetcher", "play-crash-fetcher", "dead-code-hunter", "jira-ticketer", "migrate-presenter", "migrate-presenter-legacy"],
+    kit: [
+      ["Plan", ["jira-ticketer", "spec-validator", "migration-assessor", "regression-scope-collector", "regression-plan"]],
+      ["Build", ["new-feature", "new-domain", "new-presenter", "migrate-presenter", "migrate-presenter-legacy", "add-analytics"]],
+      ["Maintain", ["build-fixer", "dep-updater", "update-deps", "dead-code-hunter", "r8-analyzer", "audit-feature-flags", "remove-feature-flag"]],
+      ["Review and merge", ["pr-orchestrator", "pr-validator", "pr-body-composer", "pr-failure-modes", "reviewer", "stack-pr", "merge-queue", "circleci-insights"]],
+      ["Test", ["automation-tests", "automation-coverage-correlator", "xray-test-selector"]],
+      ["Release and monitor", ["ship-release", "release-triage", "research-changelog", "changelog-researcher", "crash-correlator", "embrace-crash-fetcher", "play-crash-fetcher"]],
+      ["Docs", ["docs-author", "doc-auditor", "doc-audit", "new-doc"]],
+    ],
+  },
+
   roles: [
     { org: "GOAT Group", title: "Senior Staff Engineer", period: "Mar 2026 – Aug 2026", start: 2018.4, end: 2026.6, group: "GOAT", place: "Sacramento, CA", id: "goat", metrics: [{ t: "Crash-free rate · Fawkes rewrite", n: "Within 2 months of release.", rows: [["Before", 91.9, "91.9%"], ["After", 99.2, "99.2%"]], max: 100 }], arch: ["MVI + Compose", "Checkout & payments", "AI-driven engineering"], code: [["MVI core sample", "samples/mvi-core"], ["Checkout payments sample", "samples/checkout-payments"], ["Claude Code agents & skills", "samples/claude-agents"]], media: [], tags: ["Kotlin","Compose","MVI","Claude Code","Payments","Global teams"],
       points: [

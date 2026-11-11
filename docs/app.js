@@ -193,6 +193,79 @@ const cats = ["All", ...P.skills.map(s => s.cat)]; let csel = "All";
 cats.forEach(c => { const b = el("button", { class: "chip" + (c === csel ? " on" : "") }, c); b.onclick = () => { csel = c; $$("#skill-filter .chip").forEach(x => x.classList.toggle("on", x.textContent === c)); drawSkills(); }; $("#skill-filter").append(b); });
 function drawSkills() { const g = $("#skills-grid"); g.innerHTML = ""; P.skills.filter(s => csel === "All" || s.cat === csel).forEach(s => g.append(el("div", { class: "card" }, `<h3 style="font-size:18px;margin-bottom:10px">${s.cat}</h3>` + s.items.map(([n, w]) => `<div class="row"><span>${n}</span><span class="note">${w}</span></div>`).join("")))); }
 
+// ---- AI engineering
+const AI = P.ai, mine = new Set(AI.mine);
+const ICON = { crash: "M12 3v10M12 17v.5M4 20h16L12 4z", pr: "M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9v3a3 3 0 0 1-3 3H9", code: "M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12", design: "M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" };
+AI.stories.forEach(st => {
+  const ext = st.link && st.link.startsWith("http");
+  $("#ai-stories").append(el("article", { class: "card story" },
+    `<div class="story-top"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="${ICON[st.icon]}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>${st.metric ? `<span class="story-metric">${st.metric}</span>` : ""}</div>
+     <h3>${st.title}</h3><p>${st.body}</p>
+     <div class="pieces">${st.pieces.map(p => `<code>${p}</code>`).join("")}</div>
+     ${st.link ? `<a class="story-link" href="${st.link}"${ext ? ' target="_blank" rel="noopener"' : ""}>${st.cta} →</a>` : ""}`));
+});
+AI.kit.forEach(([stage, items]) => $("#kit").append(el("div", { class: "kit-col" },
+  `<h4>${stage}</h4>${items.map(n => `<code class="${mine.has(n) ? "mine" : ""}">${n}</code>`).join("")}`)));
+
+// crash-correlator demo (simulated data)
+const CC = {
+  play: [["NullPointerException", "CartPresenter.bind", 1, "412 users"], ["OutOfMemoryError", "ImageDecoder.decode", 2, "88 users"], ["IllegalStateException", "FragmentManager.commit", 3, "51 users"], ["ANR", "ProfileRepo.load", 4, "23 users"]],
+  emb: [["NullPointerException", "CartPresenter.bind", 1, "389 sessions"], ["IllegalStateException", "FragmentManager.commit", 3, "47 sessions"], ["OutOfMemoryError", "ImageDecoder.decode", 2, "102 sessions"]],
+  tickets: { 1: ["AND-214", "NPE in CartPresenter.bind", "Play + Embrace", 1], 2: ["AND-198", "OOM in ImageDecoder.decode", "Play + Embrace", 0], 3: ["AND-215", "IllegalState in FragmentManager.commit", "Play + Embrace", 1], 4: ["AND-216", "ANR in ProfileRepo.load", "Play only", 1] },
+};
+let ccTimers = [];
+const ccReset = () => {
+  ccTimers.forEach(clearTimeout); ccTimers = [];
+  const card = r => `<div class="cc-crash" data-g="${r[2]}"><span>${r[0]}</span><small>${r[1]} · ${r[3]}</small></div>`;
+  $("#cc-play").innerHTML = CC.play.map(card).join(""); $("#cc-emb").innerHTML = CC.emb.map(card).join("");
+  $("#cc-out").innerHTML = ""; $("#cc-status").textContent = "7 crash reports from 2 sources."; $("#cc-run").disabled = false;
+};
+const later = (ms, f) => ccTimers.push(setTimeout(f, reduce ? 0 : ms));
+$("#cc-run").onclick = () => {
+  ccReset(); $("#cc-run").disabled = true; $("#cc-status").textContent = "Fetching from Play Console and Embrace…";
+  later(600, () => { $$(".cc-crash").forEach(c => c.classList.add("g" + c.dataset.g)); $("#cc-status").textContent = "Matched by exception and top app frame: 4 unique crashes."; });
+  later(1400, () => { $("#cc-status").textContent = "Checking Jira for existing tickets…"; });
+  [1, 2, 3, 4].forEach((g, i) => later(2100 + i * 550, () => {
+    const [key, sum, src, isNew] = CC.tickets[g];
+    const row = el("div", { class: "cc-ticket g" + g }, `<code>${key}</code><span>${sum}<small>${src}</small></span><b class="${isNew ? "new" : "upd"}">${isNew ? "Created" : "Updated, not duplicated"}</b>`);
+    $("#cc-out").append(row); requestAnimationFrame(() => row.classList.add("on"));
+    $$(`.cc-crash[data-g="${g}"]`).forEach(c => c.classList.add("done"));
+    if (i === 3) { $("#cc-status").textContent = "7 reports became 4 tickets: 3 created, 1 updated, 0 duplicates."; $("#cc-run").disabled = false; }
+  }));
+};
+$("#cc-reset").onclick = ccReset; ccReset();
+
+// presenter migration demo
+const MG = [
+  ["del", "class LegacyCartPresenter("], ["del", "    private val coordinator: CartCoordinator,"], ["del", ") : LegacyStatePresenter<CartState, CartEvent>() {"],
+  ["add", "class CartPresenter :", 0], ["add", "    BasePresenter<CartState, CartEvent, CartEffect>(CartState()) {", 0],
+  ["same", ""],
+  ["del", "    override fun bind(lastState: CartState?, events: Flow<CartEvent>) ="], ["del", "        events.scan(lastState ?: CartState()) { state, event ->"],
+  ["add", "    override fun bind(events: Flow<CartEvent>) =", 2], ["add", "        events.scan(state.value) { state, event ->", 2],
+  ["same", "            when (event) {"], ["same", "                is CartEvent.Add -> state.copy(items = state.items + event.priceCents)"], ["same", "                CartEvent.Checkout -> {"],
+  ["del", "                    coordinator.openCheckout(state.total)"], ["add", "                    sendEffect(CartEffect.OpenCheckout(state.total))", 3],
+  ["same", "                    state"], ["same", "                }"], ["same", "            }"], ["same", "        }"], ["same", "}"],
+];
+const MG_STEPS = ["Add a typed Effect and move initial state to the constructor", "Drop the nullable lastState from bind()", "Seed scan() from state.value", "Replace coordinator calls with sendEffect()", "Remove the coordinator; tests prove the same states"];
+let mgTimers = [];
+const mgReset = () => {
+  mgTimers.forEach(clearTimeout); mgTimers = [];
+  const code = $("#mg-code"); code.innerHTML = "";
+  MG.forEach(([k, t, step]) => { const l = el("span", { class: "ln " + k + (k === "add" ? " hidden" : "") }); l.textContent = t || " "; if (step !== undefined) l.dataset.step = step; code.append(l); });
+  $("#mg-steps").innerHTML = MG_STEPS.map(s => `<li>${s}</li>`).join(""); $("#mg-run").disabled = false;
+};
+const mgLater = (ms, f) => mgTimers.push(setTimeout(f, reduce ? 0 : ms));
+$("#mg-run").onclick = () => {
+  mgReset(); $("#mg-run").disabled = true;
+  mgLater(200, () => $$("#mg-code .del").forEach(l => l.classList.add("strike")));
+  MG_STEPS.forEach((_, i) => mgLater(900 + i * 700, () => {
+    $$("#mg-steps li")[i].classList.add("ok");
+    $$(`#mg-code .add[data-step="${i}"]`).forEach(l => l.classList.remove("hidden"));
+    if (i === 4) { $$("#mg-code .del").forEach(l => l.classList.add("gone")); $("#mg-run").disabled = false; }
+  }));
+};
+$("#mg-reset").onclick = mgReset; mgReset();
+
 function drawAll() { drawCharts(); drawArch(); window.__bff && window.__bff(); }
 drawTL(); drawSkills(); drawAll();
 })();
