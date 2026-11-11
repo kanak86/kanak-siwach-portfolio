@@ -25,6 +25,13 @@ window.PORTFOLIO = {
     ["Most recent", "Senior Staff Engineer, GOAT"],
   ],
 
+  // Verified Claude Academy course completion badges. Add a row here to add a badge.
+  learning: [
+    ["AI Fluency: Framework and foundations", "Nov 2026", "https://academy.claude.com/verify/826d9ab2d9c703a2f237dd009531d49b"],
+    ["Introduction to agent skills", "Nov 2026", "https://academy.claude.com/verify/88d90113a075189ddd97dfa8007bce01"],
+    ["Claude 101", "Nov 2026", "https://academy.claude.com/verify/5c900f85fc3e914ae0a15e26a770601f"],
+  ],
+
   ai: {
     stories: [
       { icon: "crash", title: "Crash intelligence", metric: "1 ticket per crash", body: "Two fetcher agents pull crashes from Play Console and Embrace. crash-correlator matches the same crash across both sources, and jira-ticketer creates or updates exactly one ticket for it.", pieces: ["play-crash-fetcher", "embrace-crash-fetcher", "crash-correlator", "jira-ticketer"], link: "#crash-demo", cta: "Try the demo" },

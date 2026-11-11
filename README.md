@@ -22,6 +22,8 @@ At GOAT I wrote **20 of the 40** Claude Code agents and skills in our Android te
 |---|---|
 | <img src="assets/crash-correlator-demo.gif" width="400"> | <img src="assets/presenter-migration-demo.gif" width="400"> |
 
+**Keeping current** (Claude Academy courses): [AI Fluency: Framework and foundations](https://academy.claude.com/verify/826d9ab2d9c703a2f237dd009531d49b) · [Introduction to agent skills](https://academy.claude.com/verify/88d90113a075189ddd97dfa8007bce01) · [Claude 101](https://academy.claude.com/verify/5c900f85fc3e914ae0a15e26a770601f)
+
 → Original examples: [`crash-correlator` agent](samples/claude-agents/.claude/agents/crash-correlator.md) · [`migrate-presenter` skill](samples/claude-agents/.claude/skills/migrate-presenter/SKILL.md) · [before/after presenter with tests](samples/mvi-core/src/main/kotlin/dev/kanak/mvi/migration)
 
 ## Impact at a glance

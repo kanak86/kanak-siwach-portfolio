@@ -296,6 +296,11 @@ AI.stories.forEach(st => {
 AI.kit.forEach(([stage, items]) => $("#kit").append(el("div", { class: "kit-col" },
   `<h4>${stage}</h4>${items.map(n => `<code class="${mine.has(n) ? "mine" : ""}">${n}</code>`).join("")}`)));
 
+(P.learning || []).forEach(([name, date, url]) => $("#learning").append(el("li", {},
+  `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3l2.4 1.8 3 .1.9 2.9 2.4 1.8-.9 2.9.9 2.9-2.4 1.8-.9 2.9-3 .1L12 21l-2.4-1.8-3-.1-.9-2.9L3.3 14.4l.9-2.9-.9-2.9 2.4-1.8.9-2.9 3-.1zM8.5 12l2.4 2.4 4.6-4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+   <span class="ln-name">${name}<small>Course badge · <span style="white-space:nowrap">${date}</span></small></span>
+   <a href="${url}" target="_blank" rel="noopener" aria-label="Verify ${name} on Claude Academy">Verify ↗</a>`)));
+
 // crash-correlator demo (simulated data)
 const CC = {
   play: [["NullPointerException", "CartPresenter.bind", 1, "412 users"], ["OutOfMemoryError", "ImageDecoder.decode", 2, "88 users"], ["IllegalStateException", "FragmentManager.commit", 3, "51 users"], ["ANR", "ProfileRepo.load", 4, "23 users"]],
