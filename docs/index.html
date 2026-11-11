@@ -12,7 +12,7 @@
 <body>
 <nav><div class="wrap">
   <b>Kanak Siwach</b>
-  <a href="#about">About</a><a href="#ai">AI</a><a href="#impact">Impact</a><a href="#timeline">Career</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  <a href="#about">About</a><a href="#ai">AI</a><a href="#skills">Skills</a><a href="#impact">Impact</a><a href="#timeline">Career</a><a href="#architecture">Architecture</a><a href="#demos">Live demos</a><a href="#contact">Contact</a>
   <button class="icon-btn" id="theme" aria-label="Toggle theme">◐</button>
 </div></nav>
 
@@ -70,6 +70,14 @@
     <p class="note">All 40 agents and skills in the team toolkit, by stage. <span class="kit-mine-key">Highlighted</span> ones are mine and featured above; I wrote 20 in total. Every agent loads a shared set of convention files (git, commits, Jira, feature flags, Play Console, UI automation, test management).</p>
     <div class="kit" id="kit"></div>
   </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Skills map</h2>
+  <button class="area-link" id="area-link" type="button">Filter by Area of Expertise <span aria-hidden="true">↓</span></button>
+  <p class="area-caption">Each skill shows where I used it. Select a company to jump to that role.</p>
+  <div class="chips" id="skill-filter" role="group" aria-label="Areas of expertise"></div>
+  <div class="grid2" id="skills-grid"></div>
 </div></section>
 
 <section id="impact"><div class="wrap">
@@ -135,13 +143,6 @@
     </div>
     <div class="card"><div id="bff-chart"></div><pre id="bff-out" style="margin-top:10px;max-height:150px"></pre></div>
   </div>
-</div></section>
-
-<section id="skills"><div class="wrap">
-  <h2>Skills map</h2>
-  <p class="sub">Filter by area; each skill shows where I used it.</p>
-  <div class="chips" id="skill-filter" style="margin-bottom:16px"></div>
-  <div class="grid2" id="skills-grid"></div>
 </div></section>
 
 <section id="contact"><div class="wrap">

@@ -133,3 +133,18 @@ dialog#proj::backdrop{background:rgba(5,8,12,.72);backdrop-filter:blur(3px)}
 .kit{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:820px){.kit{grid-template-columns:repeat(2,minmax(0,1fr))}.mg{grid-template-columns:1fr}}
 @media(max-width:600px){.cc-ticket{flex-wrap:wrap}.cc-ticket span{min-width:60%}.cc-ticket b{margin-left:76px}}
+
+/* skills */
+section,.role,#skill-filter{scroll-margin-top:72px}
+.area-link{display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,transparent);border:1px solid color-mix(in srgb,var(--blue) 40%,transparent);border-radius:10px;padding:8px 14px;margin-top:6px}
+.area-link:hover{background:color-mix(in srgb,var(--blue) 20%,transparent)}
+.area-caption{font-size:13px;color:var(--muted);margin:6px 0 18px}
+#skill-filter{margin-bottom:16px;border-radius:12px}
+#skill-filter.pulse{animation:pulse 1.2s ease-out}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--blue) 45%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+.where{background:none;border:0;padding:0;color:var(--blue);font:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--blue) 40%,transparent);text-underline-offset:3px}
+.where:hover{text-decoration-color:var(--blue)}
+.role.flash>button{animation:flash 1.6s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 3px var(--blue)}100%{box-shadow:0 0 0 3px transparent}}
+@media(prefers-reduced-motion:reduce){#skill-filter.pulse,.role.flash>button{animation:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

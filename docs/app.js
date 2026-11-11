@@ -65,9 +65,10 @@ const drawCharts = () => {
 // ---- timeline
 const groups = ["All", "GOAT", "Other"]; let gsel = "All";
 groups.forEach(g => { const b = el("button", { class: "chip" + (g === gsel ? " on" : "") }, g); b.onclick = () => { gsel = g; $$("#role-filter .chip").forEach(c => c.classList.toggle("on", c.textContent === g)); drawTL(); }; $("#role-filter").append(b); });
+const roleKey = r => r.group === "GOAT" ? (r.id === "goat" ? "goat" : "goat-older") : r.org.includes("Naukri") ? "naukri" : (r.id || r.org.split(/[ (]/)[0].toLowerCase().replace(/\.com/, ""));
 function drawTL() { const tl = $("#tl"); tl.innerHTML = "";
   P.roles.filter(r => gsel === "All" || (gsel === "GOAT") === (r.group === "GOAT")).forEach((r, i) => {
-    const d = el("div", { class: "role" + (r.group === "GOAT" ? " goat" : "") + (i === 0 ? " open" : "") });
+    const d = el("div", { class: "role" + (r.group === "GOAT" ? " goat" : "") + (i === 0 ? " open" : ""), "data-key": roleKey(r) });
     d.innerHTML = `<button aria-expanded="${i === 0}"><div class="t">${r.title}</div><div class="o">${r.org} · ${r.period}${r.place ? " · " + r.place : ""}</div>${r.tags.map(t => `<span class="tag">${t}</span>`).join("")}</button><div class="body">${r.points.length ? "<ul>" + r.points.map(p => `<li>${p}</li>`).join("") + "</ul>" : "<p class='note'>Details on request.</p>"}${hasDetail(r) ? `<p><button class="btn detail" data-i="${P.roles.indexOf(r)}">View project details →</button></p>` : ""}</div>`;
     const db = d.querySelector(".detail"); if (db) db.onclick = e => { e.stopPropagation(); openProject(P.roles[+db.dataset.i], db); };
     d.firstChild.onclick = () => { d.classList.toggle("open"); d.firstChild.setAttribute("aria-expanded", d.classList.contains("open")); };
@@ -191,7 +192,19 @@ $("#proj").addEventListener("close", e => e.target._opener && e.target._opener.f
 // ---- skills
 const cats = ["All", ...P.skills.map(s => s.cat)]; let csel = "All";
 cats.forEach(c => { const b = el("button", { class: "chip" + (c === csel ? " on" : "") }, c); b.onclick = () => { csel = c; $$("#skill-filter .chip").forEach(x => x.classList.toggle("on", x.textContent === c)); drawSkills(); }; $("#skill-filter").append(b); });
-function drawSkills() { const g = $("#skills-grid"); g.innerHTML = ""; P.skills.filter(s => csel === "All" || s.cat === csel).forEach(s => g.append(el("div", { class: "card" }, `<h3 style="font-size:18px;margin-bottom:10px">${s.cat}</h3>` + s.items.map(([n, w]) => `<div class="row"><span>${n}</span><span class="note">${w}</span></div>`).join("")))); }
+const ROLE_RE = /(GOAT Fawkes|GOAT|Grindr|Ticketmaster|DIRECTV NFL Sunday Ticket|DIRECTV|Seventy9 AppJacket|Naukri\.com|Buongiorno)/g;
+const keyOf = name => name.startsWith("GOAT") ? "goat" : name.startsWith("DIRECTV") ? "directv" : name.startsWith("Seventy9") ? "seventy9" : name.replace(/\.com/, "").toLowerCase();
+const whereHtml = w => (w || "").replace(ROLE_RE, m => `<button class="where" data-role="${keyOf(m)}">${m}</button>`);
+function drawSkills() { const g = $("#skills-grid"); g.innerHTML = ""; P.skills.filter(s => csel === "All" || s.cat === csel).forEach(s => g.append(el("div", { class: "card" }, `<h3 style="font-size:18px;margin-bottom:10px">${s.cat}</h3>` + s.items.map(([n, w]) => `<div class="row"><span>${n}</span><span class="note">${whereHtml(w)}</span></div>`).join("")))); }
+$("#skills-grid").addEventListener("click", e => { const b = e.target.closest(".where"); if (b) goToRole(b.dataset.role); });
+$("#area-link").onclick = () => { const f = $("#skill-filter"); f.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); f.classList.remove("pulse"); void f.offsetWidth; f.classList.add("pulse"); (f.querySelector(".chip.on") || f.querySelector(".chip")).focus({ preventScroll: true }); };
+function goToRole(key) {
+  if (gsel !== "All") { gsel = "All"; $$("#role-filter .chip").forEach(x => x.classList.toggle("on", x.textContent === "All")); drawTL(); }
+  const r = $(`#tl .role[data-key="${key}"]`); if (!r) return;
+  r.classList.add("open"); r.firstChild.setAttribute("aria-expanded", "true");
+  r.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash"); r.firstChild.focus({ preventScroll: true });
+}
 
 // ---- AI engineering
 const AI = P.ai, mine = new Set(AI.mine);
