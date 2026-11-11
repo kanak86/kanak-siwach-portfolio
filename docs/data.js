@@ -120,12 +120,12 @@ window.PORTFOLIO = {
     { cat: "Payments", items: [
       ["Klarna","GOAT"],["Affirm","GOAT"],["Google Pay","GOAT"],["GOAT Pay / Credits","GOAT"],["Google Play Billing","Grindr"]] },
     { cat: "Backend & APIs", items: [
-      ["REST","GOAT, Ticketmaster"],["GraphQL","GOAT, Ticketmaster"],["gRPC / Protobuf","GOAT, Ticketmaster"],["WebSockets","GOAT, Ticketmaster"],["Custom backend service","Ticketmaster"],["PHP / CodeIgniter APIs","Naukri.com"],["SOA backend services","Naukri.com"],["Java backend, MySQL, Linux","Buongiorno"],["Telecom billing (IN, Diameter)","Buongiorno"],["Java / Spring Boot","GOAT collaboration"],["Offline-first sync",""]] },
+      ["REST","GOAT, Ticketmaster"],["GraphQL","GOAT, Ticketmaster"],["gRPC / Protobuf","GOAT, Ticketmaster"],["WebSockets","GOAT, Ticketmaster"],["Custom backend service","Ticketmaster"],["PHP / CodeIgniter APIs","Naukri.com"],["SOA backend services","Naukri.com"],["Java backend, MySQL, Linux","Buongiorno"],["Telecom billing (IN, Diameter)","Buongiorno"],["Java / Spring Boot","GOAT collaboration"],["Offline-first sync","Grindr, Seventy9 AppJacket"]] },
     { cat: "Quality", items: [
       ["JUnit, MockK, Turbine","Grindr, GOAT"],["Test-driven development (TDD)","Grindr"],["Espresso, Robolectric","Grindr"],["Compose UI testing","GOAT"],["Snapshot testing (Paparazzi)","GOAT"],["A/B testing","Grindr, Ticketmaster"]] },
     { cat: "AI-driven engineering", items: [
       ["Claude Code agents & skills","GOAT"],["Prompt engineering","GOAT"],["Figma-to-Compose automation","GOAT"]] },
     { cat: "CI/CD & reliability", items: [
-      ["GitHub Actions, Bitrise, Jenkins, Fastlane",""],["Gradle build optimization","GOAT"],["Firebase Crashlytics & Performance","GOAT"],["Play Console staged rollouts","GOAT"]] },
+      ["GitHub Actions","GOAT"],["Bitrise, Jenkins, Fastlane","Ticketmaster, DIRECTV, Grindr"],["Gradle build optimization","GOAT"],["Firebase Crashlytics & Performance","GOAT"],["Play Console staged rollouts","GOAT"]] },
   ],
 };
