@@ -168,7 +168,7 @@ const ARCH = {
   "React Native bridge": { nodes: [N("js", 20, 100, "React Native (TS)", "navigation, checkout", "blue"), N("br", 250, 100, "ViewManager", "bridge", "violet"), N("nv", 480, 100, "Native venue map", "pan / zoom, seat hit-test", "aqua"), N("cp", 20, 195, "CodePush OTA", "ship JS fast", "orange")],
     edges: [["js", "br"], ["br", "nv"], ["nv", "js"], ["cp", "js"]],
     info: ["Native performance inside React Native", "Led the Ticketmaster migration to a unified cross-platform codebase and bridged the interactive venue map as a native module.", ["In-Venue Seating: 40%+ order completion, 60%+ engagement", "Custom backend service, then Microsoft CodePush OTA updates", "A/B tests across checkout to cut drop-off"], "samples/rn-native-module"] },
-  "AI-driven engineering": { nodes: [N("fg", 20, 100, "Figma frame", "layers, tokens", "blue"), N("ag", 220, 100, "figma-to-compose agent", "Claude Code", "violet"), N("ds", 220, 20, "Design system", "tokens + components", "aqua"), N("cs", 460, 100, "Compose screen", "stateless + previews", "aqua"), N("ck", 460, 190, "Review checklist", "deviations, a11y", "orange")],
+  "AI-driven engineering": { nodes: [N("fg", 20, 100, "Figma frame", "layers, tokens", "blue"), N("ag", 220, 100, "Figma-to-Compose", "Claude Code agent", "violet"), N("ds", 220, 20, "Design system", "tokens + components", "aqua"), N("cs", 460, 100, "Compose screen", "stateless + previews", "aqua"), N("ck", 460, 190, "Review checklist", "deviations, a11y", "orange")],
     edges: [["fg", "ag"], ["ds", "ag"], ["ag", "cs"], ["cs", "ck"]],
     info: ["Agents that ship UI faster", "Built and deployed custom Claude Code agents, skills and prompt engineering across the engineering organization.", ["50%+ reduction in UI development time", "Automated Figma-to-Compose workflows", "Skills encode MVI conventions so new features start correct"], "samples/claude-agents"] },
 };
@@ -182,7 +182,8 @@ function renderArch(s, A) {
   A.edges.forEach(([f, t]) => { const [x1, y1, x2, y2] = edge(byId[f], byId[t]); s.append(svg("line", { x1, y1, x2, y2, stroke: css("--muted"), "stroke-width": 1.6, class: "flow", "marker-end": "url(#ar)" })); });
   A.nodes.forEach(n => { const g = svg("g"); g.append(svg("rect", { x: n.x, y: n.y, width: W, height: H, rx: 10, fill: css("--surface2"), stroke: css("--" + n.color), "stroke-width": 2 }));
     g.append(svg("text", { x: n.x + W / 2, y: n.y + (n.sub ? 21 : 30), "text-anchor": "middle", style: "font-weight:700;font-size:12px" }, n.label));
-    if (n.sub) g.append(svg("text", { x: n.x + W / 2, y: n.y + 38, "text-anchor": "middle", class: "m", style: "font-size:10.5px" }, n.sub)); s.append(g); });
+    if (n.sub) g.append(svg("text", { x: n.x + W / 2, y: n.y + 38, "text-anchor": "middle", class: "m", style: "font-size:10.5px" }, n.sub)); s.append(g);
+    g.querySelectorAll("text").forEach(t => { try { if (t.getComputedTextLength() > W - 14) { t.setAttribute("textLength", W - 14); t.setAttribute("lengthAdjust", "spacingAndGlyphs"); } } catch (e) {} }); });
 }
 function drawArch() {
   const A = ARCH[arch]; renderArch($("#arch-svg"), A);
