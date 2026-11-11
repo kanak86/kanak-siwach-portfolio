@@ -50,29 +50,58 @@ function barChart(host, rows, { max, unit = "%", colors }) {
   host.append(s);
   host.append(el("details", {}, `<summary class="note">Data table</summary><table style="width:100%;font-size:14px">${rows.map(r => `<tr><td>${r.label} ${r.sub || ""}</td><td>${r.text || r.value + unit}</td></tr>`).join("")}</table>`));
 }
-const drawCharts = () => {
-  const BA = [
-    { t: "Crash-free rate · GOAT Fawkes rewrite", n: "Within 2 months of release.", rows: [["Before", 91.9, "91.9%"], ["After", 99.2, "99.2%"]], max: 100 },
-    { t: "Crash-free rate · DIRECTV NFL Sunday Ticket", n: "On the rewritten flows.", rows: [["Before", 85, "85%"], ["After", 98, "98%"]], max: 100 },
-    { t: "Play Store rating · DIRECTV NFL Sunday Ticket", n: "Within 6 months of the relaunch.", rows: [["Before", 2.3, "2.3 ★"], ["After", 3.8, "3.8 ★"]], max: 5 },
-    { t: "Ad delivery rate · Seventy9 AppJacket SDK", n: "Ad delivery rate to devices, before vs after.", rows: [["Before", 48, "48%"], ["After", 100, "100%"]], max: 100 }];
-  const ba = $("#ba"); ba.innerHTML = "";
-  BA.forEach((c, i) => { const card = el("div", { class: "card" }, `<h3 style="font-size:16px">${c.t}</h3><p class="note">${c.n}</p><div id="ba${i}"></div>`); ba.append(card);
-    barChart($("#ba" + i), c.rows.map(([label, value, text]) => ({ label, value, text })), { max: c.max, colors: [css("--orange"), css("--blue")] }); });
-  barChart($("#chart-lift"), [{ label: "Klarna + Affirm", sub: "order completion", value: 20, text: "20%+" }, { label: "In-Venue Seating", sub: "order completion", value: 40, text: "40%+" }, { label: "In-Venue Seating", sub: "engagement", value: 60, text: "60%+" }], { max: 66, colors: [css("--aqua"), css("--blue"), css("--violet")] });
-};
+const drawCharts = () => {};
 
 // ---- timeline
-const groups = ["All", "GOAT", "Other"]; let gsel = "All";
-groups.forEach(g => { const b = el("button", { class: "chip" + (g === gsel ? " on" : "") }, g); b.onclick = () => { gsel = g; $$("#role-filter .chip").forEach(c => c.classList.toggle("on", c.textContent === g)); drawTL(); }; $("#role-filter").append(b); });
-const roleKey = r => r.group === "GOAT" ? (r.id === "goat" ? "goat" : "goat-older") : r.org.includes("Naukri") ? "naukri" : (r.id || r.org.split(/[ (]/)[0].toLowerCase().replace(/\.com/, ""));
+const roleKey = r => r.group === "GOAT" ? "goat" : r.org.includes("Naukri") ? "naukri" : (r.id || r.org.split(/[ (]/)[0].toLowerCase());
+const MON = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+const ym = t => { const [m, y] = t.trim().split(" "); return +y + MON[m] / 12; };
+const span = r => r.period.split("–").map(ym);
+const A0 = 2008, A1 = 2026.75, pct = y => ((y - A0) / (A1 - A0) * 100).toFixed(2);
+const GROWTH = [
+  ["buongiorno", "2008", "Shipped backend systems", "Telecom billing engine"],
+  ["naukri", "2011", "Owned an app end to end", "Sole developer, then led 2 interns"],
+  ["seventy9", "2013", "Led a team", "Team of 4, ad SDK"],
+  ["ticketmaster", "2015", "Led a platform migration", "Android to React Native"],
+  ["grindr", "2017", "Set a quality bar", "TDD, 90%+ coverage"],
+  ["goat", "2018–26", "Owned architecture across teams", "Sr. Engineer II → Staff → Senior Staff"],
+];
+GROWTH.forEach(([k, yr, h, sub], i) => {
+  const b = el("button", { class: "step", style: `--i:${i}`, "data-role": k }, `<span class="yr">${yr}</span><b>${h}</b><small>${sub}</small>`);
+  b.onclick = () => goToRole(k); $("#growth").append(b);
+});
+new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { $("#growth").classList.add("in"); o.disconnect(); } }), { threshold: .3 }).observe($("#growth"));
+
+const bars = m => `<div class="xp-metric"><div class="xp-mt">${m.t}</div>${m.rows.map(([l, v, t], j) =>
+  `<div class="xp-bar ${m.lift ? "after" : j ? "after" : "before"}"><span class="k">${l}</span><span class="tr"><span class="fl" data-w="${(v / m.max * 100).toFixed(1)}"></span></span><span class="v">${t}</span></div>`).join("")}${m.n ? `<div class="note">${m.n}</div>` : ""}</div>`;
+function setOpen(d, open) {
+  d.classList.toggle("open", open); d.querySelector(".xp-head").setAttribute("aria-expanded", open);
+  $$(".fl", d).forEach(f => f.style.width = open ? f.dataset.w + "%" : "0");
+}
 function drawTL() { const tl = $("#tl"); tl.innerHTML = "";
-  P.roles.filter(r => gsel === "All" || (gsel === "GOAT") === (r.group === "GOAT")).forEach((r, i) => {
-    const d = el("div", { class: "role" + (r.group === "GOAT" ? " goat" : "") + (i === 0 ? " open" : ""), "data-key": roleKey(r) });
-    d.innerHTML = `<button aria-expanded="${i === 0}"><div class="t">${r.title}</div><div class="o">${r.org} · ${r.period}${r.place ? " · " + r.place : ""}</div>${r.tags.map(t => `<span class="tag">${t}</span>`).join("")}</button><div class="body">${r.points.length ? "<ul>" + r.points.map(p => `<li>${p}</li>`).join("") + "</ul>" : "<p class='note'>Details on request.</p>"}${hasDetail(r) ? `<p><button class="btn detail" data-i="${P.roles.indexOf(r)}">View project details →</button></p>` : ""}</div>`;
-    const db = d.querySelector(".detail"); if (db) db.onclick = e => { e.stopPropagation(); openProject(P.roles[+db.dataset.i], db); };
-    d.firstChild.onclick = () => { d.classList.toggle("open"); d.firstChild.setAttribute("aria-expanded", d.classList.contains("open")); };
-    tl.append(d); }); }
+  P.roles.forEach((r, i) => {
+    const [s0, s1] = span(r), key = roleKey(r), id = "xp-" + key;
+    const metrics = [...(r.metrics || []), ...(r.lift ? [Object.assign({ lift: 1 }, r.lift)] : [])];
+    const d = el("article", { class: "xp-role" + (r.group === "GOAT" ? " goat" : ""), "data-key": key });
+    d.innerHTML = `<button class="xp-head" aria-expanded="false" aria-controls="${id}">
+        <span class="xp-main"><span class="t">${r.title}</span><span class="o">${r.org} · ${r.period}</span></span>
+        <span class="xp-span" aria-hidden="true"><i style="left:${pct(s0)}%;width:${Math.max(1.2, pct(s1) - pct(s0))}%"></i></span>
+        <span class="xp-pill">${r.impact}</span><span class="chev" aria-hidden="true">›</span></button>
+      <p class="xp-tease">${r.tease}</p>
+      <div class="xp-body" id="${id}"><div class="xp-in">
+        ${r.ladder ? `<div class="xp-ladder">${r.ladder.map(([t, p]) => `<div><b>${t}</b><small>${p}</small></div>`).join("")}</div>` : ""}
+        ${metrics.length ? `<h4 class="s1">Measured impact</h4><div class="xp-metrics s1">${metrics.map(bars).join("")}</div>` : ""}
+        <h4 class="s2">What I did</h4><ul class="s2">${r.points.map(p => `<li>${p}</li>`).join("")}</ul>
+        <h4 class="s3">Achievements</h4><div class="xp-wins s3">${r.wins.map(w => `<div>${w}</div>`).join("")}</div>
+        ${hasDetail(r) ? `<p class="s3"><button class="btn detail" data-i="${i}">View project details →</button></p>` : ""}
+      </div></div>`;
+    const h = d.querySelector(".xp-head");
+    h.onclick = () => setOpen(d, !d.classList.contains("open"));
+    const db = d.querySelector(".detail"); if (db) db.onclick = e => { e.stopPropagation(); openProject(r, db); };
+    tl.append(d);
+  });
+  setTimeout(() => setOpen($("#tl .xp-role"), true), 50);
+}
 
 // ---- architecture explorer
 const N = (id, x, y, label, sub, color) => ({ id, x, y, label, sub, color });
@@ -199,11 +228,10 @@ function drawSkills() { const g = $("#skills-grid"); g.innerHTML = ""; P.skills.
 $("#skills-grid").addEventListener("click", e => { const b = e.target.closest(".where"); if (b) goToRole(b.dataset.role); });
 $("#area-link").onclick = () => { const f = $("#skill-filter"); f.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); f.classList.remove("pulse"); void f.offsetWidth; f.classList.add("pulse"); (f.querySelector(".chip.on") || f.querySelector(".chip")).focus({ preventScroll: true }); };
 function goToRole(key) {
-  if (gsel !== "All") { gsel = "All"; $$("#role-filter .chip").forEach(x => x.classList.toggle("on", x.textContent === "All")); drawTL(); }
-  const r = $(`#tl .role[data-key="${key}"]`); if (!r) return;
-  r.classList.add("open"); r.firstChild.setAttribute("aria-expanded", "true");
+  const r = $(`#tl .xp-role[data-key="${key}"]`); if (!r) return;
+  setOpen(r, true);
   r.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-  r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash"); r.firstChild.focus({ preventScroll: true });
+  r.classList.remove("flash"); void r.offsetWidth; r.classList.add("flash"); r.querySelector(".xp-head").focus({ preventScroll: true });
 }
 
 // ---- AI engineering

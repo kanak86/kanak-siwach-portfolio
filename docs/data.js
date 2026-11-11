@@ -45,9 +45,62 @@ window.PORTFOLIO = {
   },
 
   roles: [
-    { org: "GOAT Group", title: "Senior Staff Engineer", period: "Mar 2026 – Aug 2026", start: 2018.4, end: 2026.6, group: "GOAT", place: "Sacramento, CA", id: "goat", metrics: [{ t: "Crash-free rate · Fawkes rewrite", n: "Within 2 months of release.", rows: [["Before", 91.9, "91.9%"], ["After", 99.2, "99.2%"]], max: 100 }], arch: ["MVI + Compose", "Checkout & payments", "AI-driven engineering"], code: [["MVI core sample", "samples/mvi-core"], ["Checkout payments sample", "samples/checkout-payments"], ["Claude Code agents & skills", "samples/claude-agents"]], media: [], tags: ["Kotlin","Compose","MVI","Claude Code","Payments","Global teams"],
-      points: [
-        "Highlights below span my full GOAT tenure (Jun 2018 – Aug 2026) across three levels.",
+    {
+      "org": "GOAT Group",
+      "title": "Senior Staff Engineer",
+      "period": "Jun 2018 – Aug 2026",
+      "group": "GOAT",
+      "place": "Sacramento, CA",
+      "id": "goat",
+      "metrics": [
+        {
+          "t": "Crash-free rate · Fawkes rewrite",
+          "n": "Within 2 months of release.",
+          "rows": [
+            [
+              "Before",
+              91.9,
+              "91.9%"
+            ],
+            [
+              "After",
+              99.2,
+              "99.2%"
+            ]
+          ],
+          "max": 100
+        }
+      ],
+      "arch": [
+        "MVI + Compose",
+        "Checkout & payments",
+        "AI-driven engineering"
+      ],
+      "code": [
+        [
+          "MVI core sample",
+          "samples/mvi-core"
+        ],
+        [
+          "Checkout payments sample",
+          "samples/checkout-payments"
+        ],
+        [
+          "Claude Code agents & skills",
+          "samples/claude-agents"
+        ]
+      ],
+      "media": [],
+      "tags": [
+        "Kotlin",
+        "Compose",
+        "MVI",
+        "Claude Code",
+        "Payments",
+        "Global teams"
+      ],
+      "points": [
+        "Grew from Sr. Engineer II to Staff to Senior Staff on a platform serving ~120K daily active users.",
         "Led a 9-engineer team through an 11-month architecture transformation of the Fawkes Android app, consolidating fragmented legacy codebases into one MVI + Jetpack Compose framework.",
         "Raised crash-free rate from 91.9% to 99.2% within 2 months of release through stronger architecture, automated testing and engineering practices.",
         "Cut feature development and rollout time by ~50% by removing cross-architecture dependencies.",
@@ -60,54 +113,302 @@ window.PORTFOLIO = {
         "Spearheaded Jetpack Compose adoption, lifting UX/UI quality and reaching iOS parity.",
         "Standardized the design system with UX/UI teams, aligning UI with Google standards and reducing design-to-development friction.",
         "Automated Figma-to-Compose workflows to speed design-to-production delivery.",
-        "Drove 20%+ order completion through Klarna and Affirm payment integration."] },
-    { org: "GOAT Group", title: "Staff Engineer", period: "Feb 2022 – Mar 2026", group: "GOAT", place: "Sacramento, CA", tags: ["Compose","Design System","Checkout"],
-      points: ["Progressive Staff-level scope on the same platform. See the Senior Staff entry for highlights across my GOAT tenure."] },
-    { org: "GOAT Group", title: "Sr. Engineer II / Sr. Android Engineer", period: "Jun 2018 – Feb 2022", group: "GOAT", place: "Sacramento, CA", tags: ["Android","Checkout","Klarna","Affirm"],
-      points: ["Platform serving ~120K daily active users. See the Senior Staff entry for highlights across my GOAT tenure."] },
-    { org: "UpKeep Maintenance Management", title: "Lead Android Developer", period: "Mar 2018 – Jun 2018", place: "Westwood, CA", tags: ["Re-architecture","Mentoring"],
-      points: ["Led application re-architecture, modernizing core components while mentoring offshore engineering teams.",
-               "Directed end-to-end feature delivery with zero-downtime production rollouts."] },
-    { org: "Grindr", title: "Lead Android Developer", period: "Apr 2017 – Feb 2018", place: "Los Angeles, CA", tags: ["TDD","Testing","Billing","A/B"],
-      points: ["Followed test-driven development (TDD) throughout, reaching 90%+ test coverage with 4,000+ JUnit tests plus Robolectric and Espresso UI tests.",
-               "Partnered with Product on A/B testing and shipped Google Play In-App Billing for global subscriptions."] },
-    { org: "Ticketmaster", title: "Senior Android Developer", period: "Jul 2015 – Apr 2017", place: "Los Angeles, CA", id: "ticketmaster", arch: ["React Native bridge"], code: [["React Native native-module bridge", "samples/rn-native-module"]], media: [], tags: ["React Native","Native Module","CodePush","Custom backend service"],
-      points: ["Led migration of the native Android app to React Native, architecting a unified codebase shared with iOS.",
-               "Built the interactive venue map as a native module bridged into React Native, keeping native performance for seat discovery and purchase.",
-               "Developed a custom backend service, then Microsoft CodePush over-the-air updates.",
-               "Used A/B tests across checkout, plus shared-element transitions and collapsible headers, to reduce checkout drop-off.",
-               "In-Venue Seating: 40%+ higher order completion and 60%+ engagement."] },
-    { org: "Calance (DIRECTV)", title: "Sr. Android Developer", period: "Oct 2013 – Jul 2015", place: "", id: "directv", metrics: [{ t: "Crash-free rate · rewritten flows", n: "On the rewritten flows.", rows: [["Before", 85, "85%"], ["After", 98, "98%"]], max: 100 }, { t: "Play Store rating", n: "Within 6 months of the relaunch.", rows: [["Before", 2.3, "2.3 ★"], ["After", 3.8, "3.8 ★"]], max: 5 }], media: [], tags: ["NFL Sunday Ticket","MVVM","RecyclerView","Tablet UI","Video streaming","Solo developer"],
-      points: [
+        "Drove 20%+ order completion through Klarna and Affirm payment integration."
+      ],
+      "ladder": [
+        [
+          "Sr. Engineer II / Sr. Android Engineer",
+          "Jun 2018 – Feb 2022"
+        ],
+        [
+          "Staff Engineer",
+          "Feb 2022 – Mar 2026"
+        ],
+        [
+          "Senior Staff Engineer",
+          "Mar 2026 – Aug 2026"
+        ]
+      ],
+      "impact": "Crash-free 91.9% → 99.2%",
+      "tease": "Led 9 engineers through an 11-month MVI + Compose rewrite, then built AI tooling for the team.",
+      "wins": [
+        "91.9% → 99.2% crash-free in 2 months",
+        "~50% faster feature delivery",
+        "iOS parity within 3 months",
+        "20%+ order completion with Klarna and Affirm",
+        "50%+ less UI development time with Claude Code agents",
+        "72 presenters migrated to MVI with skills I wrote"
+      ]
+    },
+    {
+      "org": "UpKeep Maintenance Management",
+      "title": "Lead Android Developer",
+      "period": "Mar 2018 – Jun 2018",
+      "place": "Westwood, CA",
+      "tags": [
+        "Re-architecture",
+        "Mentoring"
+      ],
+      "points": [
+        "Led application re-architecture, modernizing core components while mentoring offshore engineering teams.",
+        "Directed end-to-end feature delivery with zero-downtime production rollouts."
+      ],
+      "impact": "Zero-downtime rollouts",
+      "tease": "Led an app re-architecture while mentoring offshore engineers.",
+      "wins": [
+        "Zero-downtime production rollouts",
+        "Mentored offshore engineering teams"
+      ]
+    },
+    {
+      "org": "Grindr",
+      "title": "Lead Android Developer",
+      "period": "Apr 2017 – Feb 2018",
+      "place": "Los Angeles, CA",
+      "tags": [
+        "TDD",
+        "Testing",
+        "Billing",
+        "A/B"
+      ],
+      "points": [
+        "Followed test-driven development (TDD) throughout, reaching 90%+ test coverage with 4,000+ JUnit tests plus Robolectric and Espresso UI tests.",
+        "Partnered with Product on A/B testing and shipped Google Play In-App Billing for global subscriptions."
+      ],
+      "impact": "4,000+ tests · 90%+ coverage",
+      "tease": "Ran Android on test-driven development and shipped Play Billing for global subscriptions.",
+      "wins": [
+        "4,000+ JUnit tests",
+        "90%+ test coverage",
+        "Google Play Billing for global subscriptions"
+      ]
+    },
+    {
+      "org": "Ticketmaster",
+      "title": "Senior Android Developer",
+      "period": "Jul 2015 – Apr 2017",
+      "place": "Los Angeles, CA",
+      "id": "ticketmaster",
+      "arch": [
+        "React Native bridge"
+      ],
+      "code": [
+        [
+          "React Native native-module bridge",
+          "samples/rn-native-module"
+        ]
+      ],
+      "media": [],
+      "tags": [
+        "React Native",
+        "Native Module",
+        "CodePush",
+        "Custom backend service"
+      ],
+      "points": [
+        "Led migration of the native Android app to React Native, architecting a unified codebase shared with iOS.",
+        "Built the interactive venue map as a native module bridged into React Native, keeping native performance for seat discovery and purchase.",
+        "Developed a custom backend service, then Microsoft CodePush over-the-air updates.",
+        "Used A/B tests across checkout, plus shared-element transitions and collapsible headers, to reduce checkout drop-off.",
+        "In-Venue Seating: 40%+ higher order completion and 60%+ engagement."
+      ],
+      "impact": "40%+ order completion",
+      "tease": "Led the move to React Native; In-Venue Seating lifted order completion 40%+ and engagement 60%+.",
+      "lift": {
+        "t": "Reported lift · In-Venue Seating",
+        "rows": [
+          [
+            "Order completion",
+            40,
+            "40%+"
+          ],
+          [
+            "Engagement",
+            60,
+            "60%+"
+          ]
+        ],
+        "max": 100
+      },
+      "wins": [
+        "One codebase shared with iOS",
+        "Native venue map inside React Native",
+        "Over-the-air updates with CodePush"
+      ]
+    },
+    {
+      "org": "Calance (DIRECTV)",
+      "title": "Sr. Android Developer",
+      "period": "Oct 2013 – Jul 2015",
+      "place": "",
+      "id": "directv",
+      "metrics": [
+        {
+          "t": "Crash-free rate · rewritten flows",
+          "n": "On the rewritten flows.",
+          "rows": [
+            [
+              "Before",
+              85,
+              "85%"
+            ],
+            [
+              "After",
+              98,
+              "98%"
+            ]
+          ],
+          "max": 100
+        },
+        {
+          "t": "Play Store rating",
+          "n": "Within 6 months of the relaunch.",
+          "rows": [
+            [
+              "Before",
+              2.3,
+              "2.3 ★"
+            ],
+            [
+              "After",
+              3.8,
+              "3.8 ★"
+            ]
+          ],
+          "max": 5
+        }
+      ],
+      "media": [],
+      "tags": [
+        "NFL Sunday Ticket",
+        "MVVM",
+        "RecyclerView",
+        "Tablet UI",
+        "Video streaming",
+        "Solo developer"
+      ],
+      "points": [
         "Sole developer of the DIRECTV NFL Sunday Ticket Android app, including integrated video streaming.",
         "Rewrote the user experience and overhauled the architecture using MVVM. The old UX was hard to maintain and built on ListViews, with jittery scrolling and crashes; the rewrite moved to RecyclerView.",
         "Play Store rating rose from 2.3 to 3.8 stars within the first 6 months after the relaunch.",
         "Crash-free rate on the rewritten flows improved from 85% to 98%.",
-        "Adapted the UX to large screens, supporting tablets in both portrait and landscape."] },
-    { org: "Seventy9 Media", title: "Sr. Android Application Developer", period: "Jun 2013 – Oct 2013", place: "", id: "seventy9", metrics: [{ t: "Ad delivery rate · AppJacket SDK", n: "Ad delivery rate to devices, before vs after.", rows: [["Before", 48, "48%"], ["After", 100, "100%"]], max: 100 }], media: [], tags: ["AppJacket","Ad SDK","Video / banner / interstitial ads","SQLite","In-memory caching","Offline sync","Team of 4"],
-      points: [
+        "Adapted the UX to large screens, supporting tablets in both portrait and landscape."
+      ],
+      "impact": "2.3 → 3.8 stars",
+      "tease": "Sole developer: rewrote NFL Sunday Ticket on MVVM; rating 2.3 → 3.8 in 6 months.",
+      "wins": [
+        "2.3 → 3.8 stars in 6 months",
+        "85% → 98% crash-free on rewritten flows",
+        "Tablets in portrait and landscape"
+      ]
+    },
+    {
+      "org": "Seventy9 Media",
+      "title": "Sr. Android Application Developer",
+      "period": "Jun 2013 – Oct 2013",
+      "place": "",
+      "id": "seventy9",
+      "metrics": [
+        {
+          "t": "Ad delivery rate · AppJacket SDK",
+          "n": "Ad delivery rate to devices, before vs after.",
+          "rows": [
+            [
+              "Before",
+              48,
+              "48%"
+            ],
+            [
+              "After",
+              100,
+              "100%"
+            ]
+          ],
+          "max": 100
+        }
+      ],
+      "media": [],
+      "tags": [
+        "AppJacket",
+        "Ad SDK",
+        "Video / banner / interstitial ads",
+        "SQLite",
+        "In-memory caching",
+        "Offline sync",
+        "Team of 4"
+      ],
+      "points": [
         "Led a team of 4 on AppJacket, an in-app advertisement SDK for Android apps, delivering video, banner and interstitial ads.",
         "Implemented in-memory caching, backed by a SQLite database, so already-loaded ads are still shown when the network is unavailable or the server has no new ads.",
         "Kept only the latest 5 ads in memory to hold the footprint down, since Android devices of that era were far less powerful than today's.",
         "Ads were displayed on a random-selection basis from the cache.",
         "Captured ad impressions while offline and synced them to the server once connectivity returned.",
-        "Reached a 100% ad delivery rate to devices, up from 48% before."] },
-    { org: "Infoedge India Ltd. (Naukri.com)", title: "Sr. Software Engineer", period: "Oct 2011 – Jun 2013", place: "Delhi, India", tags: ["Android SDK","Java","PHP / CodeIgniter APIs","Hybrid WebView","SOA"],
-      points: [
+        "Reached a 100% ad delivery rate to devices, up from 48% before."
+      ],
+      "impact": "Ad delivery 48% → 100%",
+      "tease": "Led a team of 4 on the AppJacket ad SDK; ad delivery rose from 48% to 100%.",
+      "wins": [
+        "100% ad delivery, up from 48%",
+        "Impressions captured offline and synced",
+        "5-ad memory cache for low-end devices"
+      ]
+    },
+    {
+      "org": "Infoedge India Ltd. (Naukri.com)",
+      "title": "Sr. Software Engineer",
+      "period": "Oct 2011 – Jun 2013",
+      "place": "Delhi, India",
+      "tags": [
+        "Android SDK",
+        "Java",
+        "PHP / CodeIgniter APIs",
+        "Hybrid WebView",
+        "SOA"
+      ],
+      "points": [
         "Built the Naukri.com Android app from scratch as the sole developer; the first release shipped within 3 months.",
         "Owned both the app and its backend integration (Java + PHP): job search, apply, profile edits, user login and user-specific recommendations.",
         "Used the Sherlock compatibility library to bring the Action Bar to Android 2.1–3.0, then shipped a second release on Android 4.0.3 with external-storage install, a wheel date picker and menus.",
         "Integrated m.naukri.com into Android and iPhone apps as a hybrid WebView shell: the app is just 254 KB, changes ship from the backend with no app re-release, and it created a single point of maintenance. Earned an appreciation award.",
         "Built HTML5 front-end integration with the UI team and backend APIs (PHP / CodeIgniter) serving the mobile site and app wrappers, and developed backend services to introduce an SOA architecture.",
-        "Later led native Android development for Naukri.com with two interns, after the WebView app went live."] },
-    { org: "Buongiorno Digital Innovation", title: "Sr. Software Engineer", period: "Aug 2008 – Oct 2011", place: "Gurgaon, India", tags: ["Java","Linux","MySQL","Telecom billing","Backend"],
-      points: [
+        "Later led native Android development for Naukri.com with two interns, after the WebView app went live."
+      ],
+      "impact": "254 KB hybrid app",
+      "tease": "Built the Naukri.com Android app solo, first release in 3 months, then led 2 interns.",
+      "wins": [
+        "First release in 3 months",
+        "254 KB app, updates without a re-release",
+        "Appreciation award for the WebView app"
+      ]
+    },
+    {
+      "org": "Buongiorno Digital Innovation",
+      "title": "Sr. Software Engineer",
+      "period": "Aug 2008 – Oct 2011",
+      "place": "Gurgaon, India",
+      "tags": [
+        "Java",
+        "Linux",
+        "MySQL",
+        "Telecom billing",
+        "Backend"
+      ],
+      "points": [
         "Built a user-subscription engine used for ETISALAT, AIRTEL, IDEA 3G and IDEA 2G at a value-added-services company working with 130+ operators worldwide.",
         "Routed user messages on short codes to the right Java application to subscribe or unsubscribe users.",
         "Implemented IN and Diameter billing and periodic renewals, covering postpaid, prepaid and prepaid-to-postpaid users with fallback, step charging, grace mode, suspension mode and try-and-buy.",
         "Built cron applications for billing and renewal retries, plus event notifications and callbacks to content providers.",
         "Delivered service-pack grouping and upgrades, RRBT / CRBT provisioning, and fully configurable services, durations and billing amounts.",
-        "Maintained records and reporting scripts in MySQL, optimized code, and supported the operations team on the projects."] },
+        "Maintained records and reporting scripts in MySQL, optimized code, and supported the operations team on the projects."
+      ],
+      "impact": "Billing for 4 operator services",
+      "tease": "Built the subscription and billing engine for ETISALAT, AIRTEL and IDEA.",
+      "wins": [
+        "IN and Diameter billing",
+        "Prepaid and postpaid with fallback and step charging",
+        "Fully configurable services and billing"
+      ]
+    }
   ],
 
   skills: [
