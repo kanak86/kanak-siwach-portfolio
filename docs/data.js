@@ -15,13 +15,13 @@ window.PORTFOLIO = {
     { value: 20, suffix: "", label: "agents and skills I wrote", sub: "out of a 40-piece team AI toolkit" },
   ],
 
-  about: "I'm an Android engineer with 14+ years of experience and 18+ in software overall. Most recently I was Senior Staff Engineer at GOAT, the world's largest sneaker and streetwear marketplace, where I drove our MVI/MVVM architecture, prototyped Kotlin Multiplatform for the Sneakers.com vertical, and built custom AI agents and skills on Claude Code, including one that turns Figma designs directly into production Compose UI. Before GOAT, I led Android work at Grindr and Ticketmaster, with a focus on testing rigor, A/B testing and revenue-critical features like in-app billing and interactive seat maps. I'm drawn to high-scale consumer mobile engineering at companies that are leaning into AI in how they build, not just in what they ship. Based in Sacramento, CA, and open to senior and staff mobile roles.",
+  about: "I'm an Android engineer with 14+ years of experience and 18+ in software overall. Most recently I was Senior Staff Engineer at GOAT, the world's largest sneaker and streetwear marketplace, where I drove our MVI/MVVM architecture, prototyped Kotlin Multiplatform and Flutter for the Sneakers.com vertical, and built custom AI agents and skills on Claude Code, including one that turns Figma designs directly into production Compose UI. Before GOAT, I led Android work at Grindr and Ticketmaster, with a focus on testing rigor, A/B testing and revenue-critical features like in-app billing and interactive seat maps. I'm drawn to high-scale consumer mobile engineering at companies that are leaning into AI in how they build, not just in what they ship. Based in Sacramento, CA, and open to senior and staff mobile roles.",
 
   glance: [
     ["Based in", "Sacramento, CA"],
     ["Open to", "Senior and staff mobile roles"],
     ["Focus", "Android architecture, AI-driven engineering"],
-    ["Also", "Kotlin Multiplatform, React Native, BFF services"],
+    ["Also", "Kotlin Multiplatform, Flutter, React Native, AWS, BFF services"],
     ["Most recent", "Senior Staff Engineer, GOAT"],
   ],
 
@@ -116,7 +116,8 @@ window.PORTFOLIO = {
         "Built and deployed custom Claude Code agents across engineering, cutting UI development time by 50%+.",
         "Established MVI standards and documentation and mentored engineers on modern architecture and AI-assisted development.",
         "Coordinated work across distributed teams in Ukraine, China and multiple time zones across the US.",
-        "Prototyped Kotlin Multiplatform for the Sneakers.com vertical to enable synchronized Android/iOS feature development.",
+        "Built Kotlin Multiplatform and Flutter/Dart proofs of concept for the Sneakers.com vertical to compare approaches for synchronized Android/iOS feature development.",
+        "Used Bluetooth Low Energy (BLE) for GOAT's Android watch application.",
         "Spearheaded Jetpack Compose adoption, lifting UX/UI quality and reaching iOS parity.",
         "Standardized the design system with UX/UI teams, aligning UI with Google standards and reducing design-to-development friction.",
         "Automated Figma-to-Compose workflows to speed design-to-production delivery.",
@@ -420,15 +421,16 @@ window.PORTFOLIO = {
 
   skills: [
     { cat: "Android & UI", items: [
-      ["Kotlin","GOAT, Grindr"],["Jetpack Compose","GOAT"],["Material 3","GOAT"],["Coroutines / Flow","GOAT"],["Hilt / Dagger","GOAT"],["Room, DataStore, WorkManager, Paging 3","GOAT"],["Accessibility (TalkBack, WCAG)","GOAT"],["RecyclerView & tablet / large-screen UI","DIRECTV"],["SQLite & in-memory caching","Seventy9 AppJacket"],["Offline-first impression sync","Seventy9 AppJacket"]] },
+      ["Kotlin","GOAT, Grindr"],["Jetpack Compose","GOAT"],["Material 3","GOAT"],["Coroutines / Flow","GOAT"],["Hilt / Dagger","GOAT"],["Room, DataStore, WorkManager, Paging 3","GOAT"],["Accessibility (TalkBack, WCAG)","GOAT"],["RecyclerView & tablet / large-screen UI","DIRECTV"],["SQLite & in-memory caching","Seventy9 AppJacket"],["Offline-first impression sync","Seventy9 AppJacket"],["Bluetooth Low Energy (BLE)","GOAT Android watch app"]] },
     { cat: "Architecture", items: [
       ["MVI","GOAT Fawkes"],["MVVM","GOAT, DIRECTV NFL Sunday Ticket"],["Clean Architecture","GOAT"],["Modular architecture","GOAT"],["Design systems","GOAT"],["SDK design (ad SDK)","Seventy9 AppJacket"]] },
     { cat: "Cross-platform", items: [
-      ["React Native","Ticketmaster"],["Native modules / bridging","Ticketmaster"],["Kotlin Multiplatform","Prototype, Sneakers.com vertical (GOAT)"],["CodePush OTA","Ticketmaster"],["Hybrid WebView apps (Android + iPhone)","Naukri.com"]] },
+      ["React Native","Ticketmaster"],["Native modules / bridging","Ticketmaster"],["Kotlin Multiplatform","Sneakers.com POC (GOAT)"],["Flutter / Dart","Sneakers.com POC vs. KMP (GOAT)"],["CodePush OTA","Ticketmaster"],["Hybrid WebView apps (Android + iPhone)","Naukri.com"]] },
     { cat: "Payments", items: [
       ["Klarna","GOAT"],["Affirm","GOAT"],["Google Pay","GOAT"],["GOAT Pay / Credits","GOAT"],["Google Play Billing","Grindr"]] },
     { cat: "Backend & APIs", items: [
       ["REST","GOAT, Ticketmaster"],["GraphQL","GOAT, Ticketmaster"],["gRPC / Protobuf","GOAT, Ticketmaster"],["WebSockets","GOAT, Ticketmaster"],["Custom backend service","Ticketmaster"],["PHP / CodeIgniter APIs","Naukri.com"],["SOA backend services","Naukri.com"],["Java backend, MySQL, Linux","Buongiorno"],["Telecom billing (IN, Diameter)","Buongiorno"],["Java / Spring Boot","GOAT collaboration"],["Offline-first sync","Grindr, Seventy9 AppJacket"]] },
+    { cat: "Cloud (AWS)", items: [["Cognito (sign-in) and Amplify",""],["AppSync (GraphQL) and Lambda",""],["S3 storage",""]] },
     { cat: "Quality", items: [
       ["JUnit, MockK, Turbine","Grindr, GOAT"],["Test-driven development (TDD)","Grindr"],["Espresso, Robolectric","Grindr"],["Compose UI testing","GOAT"],["Snapshot testing (Paparazzi)","GOAT"],["A/B testing","Grindr, Ticketmaster"]] },
     { cat: "AI-driven engineering", items: [

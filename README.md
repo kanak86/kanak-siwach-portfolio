@@ -58,8 +58,8 @@ Owned the Checkout pod across Klarna, Affirm, GOAT Pay and Google Pay. Each prov
 
 → Code: [`samples/checkout-payments`](samples/checkout-payments)
 
-### 3 · Cross-platform: React Native and Kotlin Multiplatform
-Led Ticketmaster's migration to a unified React Native codebase and bridged the interactive venue map as a native module. Prototyped Kotlin Multiplatform for GOAT's Sneakers.com vertical, for synchronized Android/iOS feature development: share the rules, keep the UI native.
+### 3 · Cross-platform: React Native, Kotlin Multiplatform and Flutter
+Led Ticketmaster's migration to a unified React Native codebase and bridged the interactive venue map as a native module. Built Kotlin Multiplatform and Flutter/Dart proofs of concept for GOAT's Sneakers.com vertical, for synchronized Android/iOS feature development: share the rules, keep the UI native.
 
 <table><tr><td><img src="assets/arch-react-native.svg" alt="React Native bridge"></td><td><img src="assets/arch-kmp.svg" alt="KMP shared module"></td></tr></table>
 
@@ -92,14 +92,16 @@ Wrote 20 of the 40 agents and skills in the team's Claude Code toolkit (see [AI-
 
 ## Tech
 
-**Android** Kotlin · Jetpack Compose · Material 3 · Coroutines/Flow · Hilt · Room · WorkManager · Paging 3 · Accessibility
-**Architecture** MVI · MVVM · Clean Architecture · modular design · design systems
-**Cross-platform** React Native · native modules · Kotlin Multiplatform · CodePush
-**Payments** Klarna · Affirm · Google Pay · Google Play Billing
-**Backend** REST · GraphQL · gRPC · WebSockets · Java / Spring Boot (collaboration) · PHP / CodeIgniter · SOA · MySQL · SQLite · telecom billing · BFF pattern
-**Quality** JUnit · MockK · Turbine · Espresso · Robolectric · Compose UI tests · Paparazzi
-**AI** Claude Code agents & skills · prompt engineering · Figma-to-Compose automation
-**CI/CD** GitHub Actions · Bitrise · Jenkins · Fastlane · Gradle optimization · Play staged rollouts
+**Android** Kotlin · Jetpack Compose · Material 3 · Coroutines/Flow · Hilt · Room · WorkManager · Paging 3 · Accessibility  
+**Architecture** MVI · MVVM · Clean Architecture · modular design · design systems  
+**Cross-platform** React Native · native modules · Kotlin Multiplatform · Flutter / Dart · CodePush  
+**Cloud (AWS)** Cognito · Amplify · AppSync · Lambda · S3  
+**Connectivity** Bluetooth Low Energy (BLE), Android watch app  
+**Payments** Klarna · Affirm · Google Pay · Google Play Billing  
+**Backend** REST · GraphQL · gRPC · WebSockets · Java / Spring Boot (collaboration) · PHP / CodeIgniter · SOA · MySQL · SQLite · telecom billing · BFF pattern  
+**Quality** JUnit · MockK · Turbine · Espresso · Robolectric · Compose UI tests · Paparazzi  
+**AI** Claude Code agents & skills · prompt engineering · Figma-to-Compose automation  
+**CI/CD** GitHub Actions · Bitrise · Jenkins · Fastlane · Gradle optimization · Play staged rollouts  
 
 ## Repository map
 
