@@ -46,13 +46,17 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObse
 
 // ---- stats count-up
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-P.stats.forEach(s => $("#stats").append(el("div", { class: "stat" }, `<div class="v" data-v="${s.value}" data-d="${s.decimals || 0}" data-s="${s.suffix}" data-c="${s.comma ? 1 : 0}">0</div><div class="l">${s.label}</div><div class="s">${s.sub}</div>`)));
-const fmt = (v, d, c, s) => (c ? Math.round(v).toLocaleString() : v.toFixed(d)) + s;
+// ---- edition: optional overrides from an edition data file (e.g. docs/data-lead.js)
+if (P.eyebrow) $("#eyebrow").textContent = P.eyebrow;
+if (P.order) { const end = $("#contact"); P.order.forEach(id => { const n = document.getElementById(id); if (n) end.before(n); }); }
+if (P.nav) $("#nav-links").innerHTML = P.nav.map(([h, t]) => `<a href="#${h}">${t}</a>`).join("");
+P.stats.forEach(s => $("#stats").append(el("div", { class: "stat" }, `<div class="v" data-v="${s.value}" data-d="${s.decimals || 0}" data-s="${s.suffix}" data-p="${s.prefix || ""}" data-c="${s.comma ? 1 : 0}">0</div><div class="l">${s.label}</div><div class="s">${s.sub}</div>`)));
+const fmt = (v, d, c, s, p = "") => p + (c ? Math.round(v).toLocaleString() : v.toFixed(d)) + s;
 $$(".stat .v").forEach(n => {
-  const t = +n.dataset.v, d = +n.dataset.d, c = +n.dataset.c, s = n.dataset.s;
-  if (reduce) { n.textContent = fmt(t, d, c, s); return; }
+  const t = +n.dataset.v, d = +n.dataset.d, c = +n.dataset.c, s = n.dataset.s, pf = n.dataset.p;
+  if (reduce) { n.textContent = fmt(t, d, c, s, pf); return; }
   new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect(); const t0 = performance.now();
-    const f = now => { const k = Math.min(1, (now - t0) / 1200), ease = 1 - Math.pow(1 - k, 3); n.textContent = fmt(t * ease, d, c, s); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })).observe(n);
+    const f = now => { const k = Math.min(1, (now - t0) / 1200), ease = 1 - Math.pow(1 - k, 3); n.textContent = fmt(t * ease, d, c, s, pf); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })).observe(n);
 });
 
 // ---- hero background (light particle network): runs only while the hero is on screen and the tab is visible

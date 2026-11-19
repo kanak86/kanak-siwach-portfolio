@@ -5,3 +5,4 @@ build/
 local.properties
 node_modules/
 .DS_Store
+docs/lead/
