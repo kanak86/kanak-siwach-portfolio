@@ -430,7 +430,7 @@ window.PORTFOLIO = {
       ["Klarna","GOAT"],["Affirm","GOAT"],["Google Pay","GOAT"],["GOAT Pay / Credits","GOAT"],["Google Play Billing","Grindr"]] },
     { cat: "Backend & APIs", items: [
       ["REST","GOAT, Ticketmaster"],["GraphQL","GOAT, Ticketmaster"],["gRPC / Protobuf","GOAT, Ticketmaster"],["WebSockets","GOAT, Ticketmaster"],["Custom backend service","Ticketmaster"],["PHP / CodeIgniter APIs","Naukri.com"],["SOA backend services","Naukri.com"],["Java backend, MySQL, Linux","Buongiorno"],["Telecom billing (IN, Diameter)","Buongiorno"],["Java / Spring Boot","GOAT collaboration"],["Offline-first sync","Grindr, Seventy9 AppJacket"]] },
-    { cat: "Cloud (AWS)", items: [["Cognito (sign-in) and Amplify",""],["AppSync (GraphQL) and Lambda",""],["S3 storage",""]] },
+    { cat: "Cloud (AWS)", items: [["Cognito (sign-in) and Amplify","GOAT"],["AppSync (GraphQL) and Lambda","GOAT"],["S3 storage","GOAT"]] },
     { cat: "Quality", items: [
       ["JUnit, MockK, Turbine","Grindr, GOAT"],["Test-driven development (TDD)","Grindr"],["Espresso, Robolectric","Grindr"],["Compose UI testing","GOAT"],["Snapshot testing (Paparazzi)","GOAT"],["A/B testing","Grindr, Ticketmaster"]] },
     { cat: "AI-driven engineering", items: [
