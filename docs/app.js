@@ -27,7 +27,7 @@ menu.onclick = () => setMenu(!links.classList.contains("open"));
 links.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && links.classList.contains("open")) { setMenu(false); menu.focus(); } });
 document.addEventListener("click", e => { if (links.classList.contains("open") && !e.target.closest("#nav")) setMenu(false); });
-const SPY = { about: "about", ai: "ai", skills: "skills", timeline: "timeline", architecture: "architecture", demos: "architecture", contact: "contact" };
+const SPY = { about: "about", "how-i-lead": "how-i-lead", ai: "ai", skills: "skills", timeline: "timeline", architecture: "architecture", demos: "architecture", contact: "contact" };
 const spyObs = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const id = SPY[e.target.id];
   $$("#nav-links a").forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("active", on); on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"); }); }), { rootMargin: "-45% 0px -50% 0px" });
 Object.keys(SPY).forEach(id => { const n = document.getElementById(id); if (n) spyObs.observe(n); });
@@ -36,7 +36,7 @@ addEventListener("scroll", () => $("#nav").classList.toggle("scrolled", scrollY 
 // ---- scroll reveal
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
-  requestAnimationFrame(() => $$("section h2, section .sub, .story, .ai-block, #skills-grid > .card, .xp-role, .arch, .demo, .contact-card").forEach((n, i) => { n.classList.add("reveal"); rv.observe(n); }));
+  requestAnimationFrame(() => $$("section h2, section .sub, .pillar, .story, .ai-block, #skills-grid > .card, .xp-role, .arch, .demo, .contact-card").forEach((n, i) => { n.classList.add("reveal"); rv.observe(n); }));
   // Coming back to the tab (or a restored page) shows everything already above the bottom of the screen at once.
   const revealUpToView = () => $$(".reveal:not(.in)").forEach(n => { if (n.getBoundingClientRect().top < innerHeight) { n.classList.add("in"); rv.unobserve(n); } });
   addEventListener("pageshow", revealUpToView);
@@ -48,6 +48,30 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObse
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 // ---- edition: optional overrides from an edition data file (e.g. docs/data-lead.js)
 if (P.eyebrow) $("#eyebrow").textContent = P.eyebrow;
+if (P.heroCta) { const cta = $(".hero .cta"); $$("a[href^='#']", cta).forEach(a => a.remove());
+  P.heroCta.slice().reverse().forEach(([h, t], i, all) => cta.prepend(el("a", { class: "btn" + (i === all.length - 1 ? " primary" : ""), href: h }, t))); }
+if (P.leadership) {
+  const L = P.leadership, sec = el("section", { id: "how-i-lead" });
+  sec.innerHTML = `<div class="wrap">
+    <h2>How I lead</h2><p class="sub">${L.sub}</p>
+    <div class="card prog" id="prog">
+      <div class="prog-head"><h3>${L.program.title}</h3><p class="note">${L.program.note}</p></div>
+      <div class="prog-track" aria-hidden="true"><span class="prog-bar"><b>${L.program.bar}</b></span><span class="prog-rel">Release</span><span class="prog-after"><b>After release</b></span></div>
+      <div class="prog-cols">
+        <div class="prog-in">
+          <h4>What I owned</h4><div class="prog-chips">${L.program.owned.map(x => `<span>${x}</span>`).join("")}</div>
+          <h4>How the team worked</h4><ol class="prog-sdlc">${L.program.sdlc.map(x => `<li>${x}</li>`).join("")}</ol>
+        </div>
+        <ul class="prog-out">${L.program.after.map(([w, t, s], i) => `<li style="--i:${i}"><span class="when">${w}</span><b>${t}</b><small>${s}</small></li>`).join("")}</ul>
+      </div>
+    </div>
+    <div class="pillars">${L.pillars.map(p => `<article class="card pillar"><h3>${p.title}</h3><p>${p.body}</p><ul>${p.evidence.map(e => `<li>${e}</li>`).join("")}</ul></article>`).join("")}</div>
+  </div>`;
+  $("#about").after(sec);
+  const prog = $("#prog");
+  if (reduce || !("IntersectionObserver" in window)) prog.classList.add("in");
+  else new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { prog.classList.add("in"); o.disconnect(); } }), { threshold: .35 }).observe(prog);
+}
 if (P.order) { const end = $("#contact"); P.order.forEach(id => { const n = document.getElementById(id); if (n) end.before(n); }); }
 if (P.nav) $("#nav-links").innerHTML = P.nav.map(([h, t]) => `<a href="#${h}">${t}</a>`).join("");
 P.stats.forEach(s => $("#stats").append(el("div", { class: "stat" }, `<div class="v" data-v="${s.value}" data-d="${s.decimals || 0}" data-s="${s.suffix}" data-p="${s.prefix || ""}" data-c="${s.comma ? 1 : 0}">0</div><div class="l">${s.label}</div><div class="s">${s.sub}</div>`)));
