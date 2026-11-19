@@ -48,6 +48,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObse
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 // ---- edition: optional overrides from an edition data file (e.g. docs/data-lead.js)
 if (P.eyebrow) $("#eyebrow").textContent = P.eyebrow;
+if (P.xpSub) $("#xp-sub").textContent = P.xpSub;
 if (P.heroCta) { const cta = $(".hero .cta"); $$("a[href^='#']", cta).forEach(a => a.remove());
   P.heroCta.slice().reverse().forEach(([h, t], i, all) => cta.prepend(el("a", { class: "btn" + (i === all.length - 1 ? " primary" : ""), href: h }, t))); }
 if (P.leadership) {
@@ -124,7 +125,7 @@ const MON = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Se
 const ym = t => { const [m, y] = t.trim().split(" "); return +y + MON[m] / 12; };
 const span = r => r.period.split("–").map(ym);
 const A0 = 2008, A1 = 2026.75, pct = y => ((y - A0) / (A1 - A0) * 100).toFixed(2);
-const GROWTH = [
+const GROWTH = P.growth || [
   ["buongiorno", "2008", "Shipped backend systems", "Telecom billing engine"],
   ["naukri", "2011", "Owned an app end to end", "Sole developer, then led 2 interns"],
   ["seventy9", "2013", "Led a team", "Team of 4, ad SDK"],
