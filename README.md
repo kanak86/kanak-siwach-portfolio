@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://kanak86.github.io/kanak-siwach-portfolio/"><b>▶ Open the interactive portfolio</b></a> ·
+  <a href="https://kanak86.github.io/kanak-siwach-portfolio/leadership/">Leadership edition</a> ·
   <a href="https://www.linkedin.com/in/kanaksiwach">LinkedIn</a> ·
   <a href="mailto:kanak86.us@gmail.com">Email</a>
 </p>
