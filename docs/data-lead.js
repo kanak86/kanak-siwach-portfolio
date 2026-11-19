@@ -1,4 +1,4 @@
-// Leadership edition: loaded after data.js on /lead/. Same career and numbers as the
+// Leadership edition: loaded after data.js on /leadership/. Same career and numbers as the
 // Engineer edition; only wording, emphasis and section order change here.
 (() => {
   const P = window.PORTFOLIO;
