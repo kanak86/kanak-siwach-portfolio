@@ -49,6 +49,7 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 // ---- edition: optional overrides from an edition data file (e.g. docs/data-lead.js)
 if (P.eyebrow) $("#eyebrow").textContent = P.eyebrow;
 if (P.xpSub) $("#xp-sub").textContent = P.xpSub;
+if (P.ai && P.ai.sub) $("#ai-sub").textContent = P.ai.sub;
 if (P.heroCta) { const cta = $(".hero .cta"); $$("a[href^='#']", cta).forEach(a => a.remove());
   P.heroCta.slice().reverse().forEach(([h, t], i, all) => cta.prepend(el("a", { class: "btn" + (i === all.length - 1 ? " primary" : ""), href: h }, t))); }
 if (P.leadership) {
@@ -298,7 +299,7 @@ $("#proj").addEventListener("close", e => e.target._opener && e.target._opener.f
 // ---- skills
 const cats = ["All", ...P.skills.map(s => s.cat)]; let csel = "All";
 cats.forEach(c => { const b = el("button", { class: "chip" + (c === csel ? " on" : "") }, c); b.onclick = () => { csel = c; $$("#skill-filter .chip").forEach(x => x.classList.toggle("on", x.textContent === c)); drawSkills(); }; $("#skill-filter").append(b); });
-const ROLE_RE = /(GOAT Fawkes|GOAT|Grindr|Ticketmaster|DIRECTV NFL Sunday Ticket|DIRECTV|Seventy9 AppJacket|Naukri\.com|Buongiorno)/g;
+const ROLE_RE = /(GOAT Fawkes|GOAT|Grindr|Ticketmaster|DIRECTV NFL Sunday Ticket|DIRECTV|Seventy9 AppJacket|Seventy9|Naukri\.com|Buongiorno|UpKeep)/g;
 const keyOf = name => name.startsWith("GOAT") ? "goat" : name.startsWith("DIRECTV") ? "directv" : name.startsWith("Seventy9") ? "seventy9" : name.replace(/\.com/, "").toLowerCase();
 const whereHtml = w => (w || "").replace(ROLE_RE, m => `<button class="where" data-role="${keyOf(m)}">${m}</button>`);
 function drawSkills() { const g = $("#skills-grid"); g.innerHTML = ""; P.skills.filter(s => csel === "All" || s.cat === csel).forEach(s => g.append(el("div", { class: "card" }, `<h3 style="font-size:18px;margin-bottom:10px">${s.cat}</h3>` + s.items.map(([n, w]) => `<div class="row"><span>${n}</span><span class="note">${whereHtml(w)}</span></div>`).join("")))); }
@@ -313,7 +314,7 @@ function goToRole(key) {
 
 // ---- AI engineering
 const AI = P.ai, mine = new Set(AI.mine);
-const ICON = { crash: "M12 3v10M12 17v.5M4 20h16L12 4z", pr: "M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9v3a3 3 0 0 1-3 3H9", code: "M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12", design: "M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" };
+const ICON = { rag: "M4 6h16M4 12h10M4 18h7M17 15a3 3 0 1 0 0 .01M19.2 17.2L21 19", crash: "M12 3v10M12 17v.5M4 20h16L12 4z", pr: "M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9v3a3 3 0 0 1-3 3H9", code: "M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12", design: "M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" };
 AI.stories.forEach(st => {
   const ext = st.link && st.link.startsWith("http");
   $("#ai-stories").append(el("article", { class: "card story" },

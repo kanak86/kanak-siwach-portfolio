@@ -121,4 +121,23 @@
     ["upkeep", "2018", "Managed offshore teams", "Re-architecture, zero downtime"],
     ["goat", "2018–26", "Managed a 9-engineer program", "Sr. Engineer II → Staff → Senior Staff"],
   ];
+
+  // AI: framed as adoption driven across the org, plus the Python / RAG agent work.
+  P.ai.sub = "I drove AI-native engineering across GOAT's engineering organization: I wrote 20 of the 40 Claude Code agents and skills in the Android team's toolkit, deployed them across engineering, and built Python and low-code agent tools for our RAG model. Every sample linked here is original code, not employer code.";
+  P.ai.stories = [
+    { icon: "rag", title: "AI agents for a RAG model", metric: "Python · low-code", body: "Built Python and low-code AI agent tools for GOAT's RAG (retrieval-augmented generation) model, so the AI could retrieve and surface products from GOAT inventory in AI-driven experiences.", pieces: ["Python", "low-code AI workflows", "RAG"] },
+    ...P.ai.stories,
+  ];
+
+  // Skills: grouped the way the leadership résumé groups them, delivery first.
+  P.skills = [
+    { cat: "Delivery and management", items: [["Managing engineering teams", "GOAT (9 engineers), UpKeep (offshore teams)"], ["Project planning, estimation and milestones", "GOAT Fawkes"], ["Workstream and release planning", "GOAT"], ["Stakeholder management", "GOAT"], ["Mentoring and coaching", "GOAT, UpKeep"], ["Distributed teams across time zones", "GOAT (US, Ukraine, China)"], ["Leading small teams", "Seventy9 (team of 4), Naukri.com (2 interns)"]] },
+    { cat: "Architecture and design", items: [["Solution architecture", "GOAT"], ["MVI and MVVM", "GOAT Fawkes, DIRECTV"], ["Clean and modular architecture", "GOAT"], ["Design systems", "GOAT"], ["Architecture and code reviews (Kotlin, Swift)", "GOAT"], ["Application modernization", "GOAT Fawkes, UpKeep, DIRECTV"]] },
+    { cat: "Languages and platforms", items: [["Kotlin", "GOAT, Grindr"], ["Java", "Buongiorno, Naukri.com"], ["Python", "GOAT"], ["TypeScript / JavaScript", "Ticketmaster"], ["React Native", "Ticketmaster"], ["Kotlin Multiplatform", "Sneakers.com POC (GOAT)"], ["Flutter / Dart", "Sneakers.com POC vs. KMP (GOAT)"], ["Bluetooth Low Energy (BLE)", "GOAT Android watch app"]] },
+    { cat: "APIs and integration", items: [["REST, GraphQL, gRPC, WebSockets", "GOAT, Ticketmaster"], ["Payment system integration", "GOAT"], ["Custom backend services", "Ticketmaster"], ["Java / Spring Boot", "GOAT collaboration"], ["SOA and PHP APIs", "Naukri.com"], ["Telecom billing (IN, Diameter)", "Buongiorno"]] },
+    { cat: "AI-native engineering", items: [["AI agents and tools (Python)", "GOAT"], ["RAG (retrieval-augmented generation)", "GOAT"], ["Low-code AI workflows", "GOAT"], ["Claude Code agents and skills", "GOAT"], ["Figma-to-Compose automation", "GOAT"], ["Prompt engineering", "GOAT"]] },
+    { cat: "Quality and test strategy", items: [["Test strategy", "Grindr"], ["Test-driven development (TDD)", "Grindr"], ["JUnit, MockK, Turbine", "Grindr, GOAT"], ["Espresso, Robolectric", "Grindr"], ["Compose UI and snapshot testing", "GOAT"], ["A/B testing", "Grindr, Ticketmaster"]] },
+    { cat: "CI/CD and release", items: [["GitHub Actions", "GOAT"], ["Bitrise, Jenkins, Fastlane", "Ticketmaster, DIRECTV, Grindr"], ["Staged rollouts and release management", "GOAT"], ["Over-the-air updates (CodePush)", "Ticketmaster"], ["Crashlytics and performance monitoring", "GOAT"]] },
+    { cat: "Cloud and payments", items: [["AWS: Cognito, Amplify, AppSync, Lambda, S3", "GOAT"], ["Klarna, Affirm, GOAT Pay, Google Pay", "GOAT"], ["Google Play Billing", "Grindr"]] },
+  ];
 })();
