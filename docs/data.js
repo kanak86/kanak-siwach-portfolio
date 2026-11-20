@@ -38,6 +38,7 @@ window.PORTFOLIO = {
       { icon: "pr", title: "Ticket to pull request", metric: "", body: "jira-ticketer turns work into well-formed tickets, pr-orchestrator runs the pull request workflow, and pr-validator checks each PR before it reaches a reviewer.", pieces: ["jira-ticketer", "pr-orchestrator", "pr-validator"] },
       { icon: "code", title: "Code health at scale", metric: "72 presenters", body: "Two migration skills moved 72 presenters across two generations of legacy patterns to one base presenter with typed effects. dead-code-hunter finds code that can be removed.", pieces: ["migrate-presenter", "migrate-presenter-legacy", "dead-code-hunter"], link: "#migration", cta: "Try the migration" },
       { icon: "design", title: "Design to code", metric: "50%+ less UI time", body: "The Figma-to-Compose agent turns a Figma frame into production Compose UI built from design-system tokens and existing components.", pieces: ["figma-to-compose"], link: "https://github.com/kanak86/kanak-siwach-portfolio/blob/main/samples/claude-agents/.claude/agents/figma-to-compose.md", cta: "Read the agent" },
+      { icon: "rag", title: "AI agents for a RAG model", metric: "Python · low-code", body: "Built Python and low-code AI agent tools for GOAT's RAG (retrieval-augmented generation) model, so the AI could retrieve and surface products from GOAT inventory in AI-driven experiences.", pieces: ["Python", "low-code AI workflows", "RAG"] },
     ],
     mine: ["pr-orchestrator", "pr-validator", "crash-correlator", "embrace-crash-fetcher", "play-crash-fetcher", "dead-code-hunter", "jira-ticketer", "migrate-presenter", "migrate-presenter-legacy"],
     kit: [
@@ -114,6 +115,7 @@ window.PORTFOLIO = {
         "Delivered iOS feature parity within 3 months of the Fawkes release.",
         "Owned the Checkout pod and payments architecture: Klarna, Affirm, GOAT Pay and Google Pay.",
         "Built and deployed custom Claude Code agents across engineering, cutting UI development time by 50%+.",
+        "Built Python and low-code AI agent tools for GOAT's RAG model, so the AI could retrieve and surface products from GOAT inventory.",
         "Established MVI standards and documentation and mentored engineers on modern architecture and AI-assisted development.",
         "Coordinated work across distributed teams in Ukraine, China and multiple time zones across the US.",
         "Built Kotlin Multiplatform and Flutter/Dart proofs of concept for the Sneakers.com vertical to compare approaches for synchronized Android/iOS feature development.",
@@ -434,7 +436,7 @@ window.PORTFOLIO = {
     { cat: "Quality", items: [
       ["JUnit, MockK, Turbine","Grindr, GOAT"],["Test-driven development (TDD)","Grindr"],["Espresso, Robolectric","Grindr"],["Compose UI testing","GOAT"],["Snapshot testing (Paparazzi)","GOAT"],["A/B testing","Grindr, Ticketmaster"]] },
     { cat: "AI-driven engineering", items: [
-      ["Claude Code agents & skills","GOAT"],["Prompt engineering","GOAT"],["Figma-to-Compose automation","GOAT"]] },
+      ["Claude Code agents & skills","GOAT"],["AI agents and tools (Python)","GOAT"],["RAG (retrieval-augmented generation)","GOAT"],["Low-code AI workflows","GOAT"],["Prompt engineering","GOAT"],["Figma-to-Compose automation","GOAT"]] },
     { cat: "CI/CD & reliability", items: [
       ["GitHub Actions","GOAT"],["Bitrise, Jenkins, Fastlane","Ticketmaster, DIRECTV, Grindr"],["Gradle build optimization","GOAT"],["Firebase Crashlytics & Performance","GOAT"],["Play Console staged rollouts","GOAT"]] },
   ],

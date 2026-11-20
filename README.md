@@ -18,6 +18,7 @@ At GOAT I wrote **20 of the 40** Claude Code agents and skills in our Android te
 |---|---|
 | **72 presenters** migrated to MVI with two migration skills I wrote | **50%+** less UI development time with Claude Code agents, including Figma-to-Compose |
 | **1 ticket per crash**: `crash-correlator` merges Play Console and Embrace crashes and has `jira-ticketer` create or update a single ticket | **Ticket to PR**: `jira-ticketer`, `pr-orchestrator` and `pr-validator` |
+| **Python and low-code AI agent tools** for GOAT's RAG model, retrieving and surfacing products from inventory | |
 
 | crash-correlator (simulated data) | migrate-presenter |
 |---|---|

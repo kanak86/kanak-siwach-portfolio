@@ -124,10 +124,8 @@
 
   // AI: framed as adoption driven across the org, plus the Python / RAG agent work.
   P.ai.sub = "I drove AI-native engineering across GOAT's engineering organization: I wrote 20 of the 40 Claude Code agents and skills in the Android team's toolkit, deployed them across engineering, and built Python and low-code agent tools for our RAG model. Every sample linked here is original code, not employer code.";
-  P.ai.stories = [
-    { icon: "rag", title: "AI agents for a RAG model", metric: "Python · low-code", body: "Built Python and low-code AI agent tools for GOAT's RAG (retrieval-augmented generation) model, so the AI could retrieve and surface products from GOAT inventory in AI-driven experiences.", pieces: ["Python", "low-code AI workflows", "RAG"] },
-    ...P.ai.stories,
-  ];
+  // The RAG card (defined in data.js) leads in this edition.
+  P.ai.stories = [...P.ai.stories.filter(x => x.icon === "rag"), ...P.ai.stories.filter(x => x.icon !== "rag")];
 
   // Skills: grouped the way the leadership résumé groups them, delivery first.
   P.skills = [
