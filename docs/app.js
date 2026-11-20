@@ -27,7 +27,7 @@ menu.onclick = () => setMenu(!links.classList.contains("open"));
 links.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && links.classList.contains("open")) { setMenu(false); menu.focus(); } });
 document.addEventListener("click", e => { if (links.classList.contains("open") && !e.target.closest("#nav")) setMenu(false); });
-const SPY = { about: "about", ai: "ai", skills: "skills", timeline: "timeline", architecture: "architecture", demos: "architecture", contact: "contact" };
+const SPY = { about: "about", "how-i-lead": "how-i-lead", ai: "ai", skills: "skills", timeline: "timeline", architecture: "architecture", demos: "architecture", contact: "contact" };
 const spyObs = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const id = SPY[e.target.id];
   $$("#nav-links a").forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("active", on); on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"); }); }), { rootMargin: "-45% 0px -50% 0px" });
 Object.keys(SPY).forEach(id => { const n = document.getElementById(id); if (n) spyObs.observe(n); });
@@ -36,7 +36,7 @@ addEventListener("scroll", () => $("#nav").classList.toggle("scrolled", scrollY 
 // ---- scroll reveal
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
-  requestAnimationFrame(() => $$("section h2, section .sub, .story, .ai-block, #skills-grid > .card, .xp-role, .arch, .demo, .contact-card").forEach((n, i) => { n.classList.add("reveal"); rv.observe(n); }));
+  requestAnimationFrame(() => $$("section h2, section .sub, .pillar, .story, .ai-block, #skills-grid > .card, .xp-role, .arch, .demo, .contact-card").forEach((n, i) => { n.classList.add("reveal"); rv.observe(n); }));
   // Coming back to the tab (or a restored page) shows everything already above the bottom of the screen at once.
   const revealUpToView = () => $$(".reveal:not(.in)").forEach(n => { if (n.getBoundingClientRect().top < innerHeight) { n.classList.add("in"); rv.unobserve(n); } });
   addEventListener("pageshow", revealUpToView);
@@ -46,13 +46,43 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObse
 
 // ---- stats count-up
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-P.stats.forEach(s => $("#stats").append(el("div", { class: "stat" }, `<div class="v" data-v="${s.value}" data-d="${s.decimals || 0}" data-s="${s.suffix}" data-c="${s.comma ? 1 : 0}">0</div><div class="l">${s.label}</div><div class="s">${s.sub}</div>`)));
-const fmt = (v, d, c, s) => (c ? Math.round(v).toLocaleString() : v.toFixed(d)) + s;
+// ---- edition: optional overrides from an edition data file (e.g. docs/data-lead.js)
+if (P.eyebrow) $("#eyebrow").textContent = P.eyebrow;
+if (P.xpSub) $("#xp-sub").textContent = P.xpSub;
+if (P.ai && P.ai.sub) $("#ai-sub").textContent = P.ai.sub;
+if (P.heroCta) { const cta = $(".hero .cta"); $$("a[href^='#']", cta).forEach(a => a.remove());
+  P.heroCta.slice().reverse().forEach(([h, t], i, all) => cta.prepend(el("a", { class: "btn" + (i === all.length - 1 ? " primary" : ""), href: h }, t))); }
+if (P.leadership) {
+  const L = P.leadership, sec = el("section", { id: "how-i-lead" });
+  sec.innerHTML = `<div class="wrap">
+    <h2>How I lead</h2><p class="sub">${L.sub}</p>
+    <div class="card prog" id="prog">
+      <div class="prog-head"><h3>${L.program.title}</h3><p class="note">${L.program.note}</p></div>
+      <div class="prog-track" aria-hidden="true"><span class="prog-bar"><b>${L.program.bar}</b></span><span class="prog-rel">Release</span><span class="prog-after"><b>After release</b></span></div>
+      <div class="prog-cols">
+        <div class="prog-in">
+          <h4>What I owned</h4><div class="prog-chips">${L.program.owned.map(x => `<span>${x}</span>`).join("")}</div>
+          <h4>How the team worked</h4><ol class="prog-sdlc">${L.program.sdlc.map(x => `<li>${x}</li>`).join("")}</ol>
+        </div>
+        <ul class="prog-out">${L.program.after.map(([w, t, s], i) => `<li style="--i:${i}"><span class="when">${w}</span><b>${t}</b><small>${s}</small></li>`).join("")}</ul>
+      </div>
+    </div>
+    <div class="pillars">${L.pillars.map(p => `<article class="card pillar"><h3>${p.title}</h3><p>${p.body}</p><ul>${p.evidence.map(e => `<li>${e}</li>`).join("")}</ul></article>`).join("")}</div>
+  </div>`;
+  $("#about").after(sec);
+  const prog = $("#prog");
+  if (reduce || !("IntersectionObserver" in window)) prog.classList.add("in");
+  else new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { prog.classList.add("in"); o.disconnect(); } }), { threshold: .35 }).observe(prog);
+}
+if (P.order) { const end = $("#contact"); P.order.forEach(id => { const n = document.getElementById(id); if (n) end.before(n); }); }
+if (P.nav) $("#nav-links").innerHTML = P.nav.map(([h, t]) => `<a href="#${h}">${t}</a>`).join("");
+P.stats.forEach(s => $("#stats").append(el("div", { class: "stat" }, `<div class="v" data-v="${s.value}" data-d="${s.decimals || 0}" data-s="${s.suffix}" data-p="${s.prefix || ""}" data-c="${s.comma ? 1 : 0}">0</div><div class="l">${s.label}</div><div class="s">${s.sub}</div>`)));
+const fmt = (v, d, c, s, p = "") => p + (c ? Math.round(v).toLocaleString() : v.toFixed(d)) + s;
 $$(".stat .v").forEach(n => {
-  const t = +n.dataset.v, d = +n.dataset.d, c = +n.dataset.c, s = n.dataset.s;
-  if (reduce) { n.textContent = fmt(t, d, c, s); return; }
+  const t = +n.dataset.v, d = +n.dataset.d, c = +n.dataset.c, s = n.dataset.s, pf = n.dataset.p;
+  if (reduce) { n.textContent = fmt(t, d, c, s, pf); return; }
   new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect(); const t0 = performance.now();
-    const f = now => { const k = Math.min(1, (now - t0) / 1200), ease = 1 - Math.pow(1 - k, 3); n.textContent = fmt(t * ease, d, c, s); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })).observe(n);
+    const f = now => { const k = Math.min(1, (now - t0) / 1200), ease = 1 - Math.pow(1 - k, 3); n.textContent = fmt(t * ease, d, c, s, pf); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })).observe(n);
 });
 
 // ---- hero background (light particle network): runs only while the hero is on screen and the tab is visible
@@ -96,7 +126,7 @@ const MON = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Se
 const ym = t => { const [m, y] = t.trim().split(" "); return +y + MON[m] / 12; };
 const span = r => r.period.split("–").map(ym);
 const A0 = 2008, A1 = 2026.75, pct = y => ((y - A0) / (A1 - A0) * 100).toFixed(2);
-const GROWTH = [
+const GROWTH = P.growth || [
   ["buongiorno", "2008", "Shipped backend systems", "Telecom billing engine"],
   ["naukri", "2011", "Owned an app end to end", "Sole developer, then led 2 interns"],
   ["seventy9", "2013", "Led a team", "Team of 4, ad SDK"],
@@ -269,7 +299,7 @@ $("#proj").addEventListener("close", e => e.target._opener && e.target._opener.f
 // ---- skills
 const cats = ["All", ...P.skills.map(s => s.cat)]; let csel = "All";
 cats.forEach(c => { const b = el("button", { class: "chip" + (c === csel ? " on" : "") }, c); b.onclick = () => { csel = c; $$("#skill-filter .chip").forEach(x => x.classList.toggle("on", x.textContent === c)); drawSkills(); }; $("#skill-filter").append(b); });
-const ROLE_RE = /(GOAT Fawkes|GOAT|Grindr|Ticketmaster|DIRECTV NFL Sunday Ticket|DIRECTV|Seventy9 AppJacket|Naukri\.com|Buongiorno)/g;
+const ROLE_RE = /(GOAT Fawkes|GOAT|Grindr|Ticketmaster|DIRECTV NFL Sunday Ticket|DIRECTV|Seventy9 AppJacket|Seventy9|Naukri\.com|Buongiorno|UpKeep)/g;
 const keyOf = name => name.startsWith("GOAT") ? "goat" : name.startsWith("DIRECTV") ? "directv" : name.startsWith("Seventy9") ? "seventy9" : name.replace(/\.com/, "").toLowerCase();
 const whereHtml = w => (w || "").replace(ROLE_RE, m => `<button class="where" data-role="${keyOf(m)}">${m}</button>`);
 function drawSkills() { const g = $("#skills-grid"); g.innerHTML = ""; P.skills.filter(s => csel === "All" || s.cat === csel).forEach(s => g.append(el("div", { class: "card" }, `<h3 style="font-size:18px;margin-bottom:10px">${s.cat}</h3>` + s.items.map(([n, w]) => `<div class="row"><span>${n}</span><span class="note">${whereHtml(w)}</span></div>`).join("")))); }
@@ -284,7 +314,7 @@ function goToRole(key) {
 
 // ---- AI engineering
 const AI = P.ai, mine = new Set(AI.mine);
-const ICON = { crash: "M12 3v10M12 17v.5M4 20h16L12 4z", pr: "M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9v3a3 3 0 0 1-3 3H9", code: "M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12", design: "M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" };
+const ICON = { rag: "M4 6h16M4 12h10M4 18h7M17 15a3 3 0 1 0 0 .01M19.2 17.2L21 19", crash: "M12 3v10M12 17v.5M4 20h16L12 4z", pr: "M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9v3a3 3 0 0 1-3 3H9", code: "M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12", design: "M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" };
 AI.stories.forEach(st => {
   const ext = st.link && st.link.startsWith("http");
   $("#ai-stories").append(el("article", { class: "card story" },
